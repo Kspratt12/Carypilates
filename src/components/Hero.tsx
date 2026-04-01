@@ -9,6 +9,7 @@ export default function Hero({
 }) {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Their actual hero image */}
       <div className="absolute inset-0">
         <img
           src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Hero.jpeg?fit=1920%2C1281&ssl=1"
@@ -30,7 +31,7 @@ export default function Hero({
           transition={{ duration: 1, ease: "easeOut" }}
         >
           <p
-            className="text-[#a990b0] text-sm md:text-base tracking-[0.3em] uppercase mb-6"
+            className="text-[#c9b5d0] text-sm md:text-base tracking-[0.3em] uppercase mb-8"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Boutique Pilates Studio - Cary, NC
@@ -41,7 +42,7 @@ export default function Hero({
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-          className="text-5xl md:text-7xl lg:text-8xl text-white font-light leading-tight mb-4"
+          className="text-5xl md:text-7xl lg:text-[6.5rem] text-white font-light leading-[1.1] mb-4"
         >
           Find Your{" "}
           <span className="italic text-[#c9b5d0]">Strength.</span>
@@ -51,7 +52,7 @@ export default function Hero({
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.35, ease: "easeOut" }}
-          className="text-5xl md:text-7xl lg:text-8xl text-white font-light leading-tight mb-4"
+          className="text-5xl md:text-7xl lg:text-[6.5rem] text-white font-light leading-[1.1] mb-4"
         >
           Move with{" "}
           <span className="italic text-[#c9b5d0]">Grace.</span>
@@ -61,7 +62,7 @@ export default function Hero({
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-          className="text-5xl md:text-7xl lg:text-8xl text-white font-light leading-tight mb-8"
+          className="text-5xl md:text-7xl lg:text-[6.5rem] text-white font-light leading-[1.1] mb-10"
         >
           Live in{" "}
           <span className="italic text-[#c9b5d0]">Balance.</span>
@@ -71,7 +72,7 @@ export default function Hero({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.65, ease: "easeOut" }}
-          className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
           style={{ fontFamily: "var(--font-inter)" }}
         >
           A boutique Pilates studio providing a personalized fitness experience
@@ -83,18 +84,18 @@ export default function Hero({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-5 justify-center"
         >
           <button
             onClick={onOpenCalendar}
-            className="bg-[#8b7093] text-white px-10 py-4 rounded-full text-base font-semibold tracking-wide hover:bg-[#7a6082] transition-all duration-300 hover:shadow-xl hover:shadow-[#8b7093]/30 hover:-translate-y-0.5"
+            className="bg-[#8b7093] text-white px-12 py-4.5 rounded-full text-base font-semibold tracking-wide hover:bg-[#7a6082] transition-all duration-300 hover:shadow-2xl hover:shadow-[#8b7093]/40 hover:-translate-y-1"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Try an Intro Session
           </button>
           <a
             href="#classes"
-            className="border border-white/30 text-white px-10 py-4 rounded-full text-base font-semibold tracking-wide hover:bg-white/10 transition-all duration-300 hover:-translate-y-0.5"
+            className="border-2 border-white/30 text-white px-12 py-4.5 rounded-full text-base font-semibold tracking-wide hover:bg-white hover:text-[#1d1d22] transition-all duration-300 hover:-translate-y-1"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Explore Classes
@@ -113,7 +114,7 @@ export default function Hero({
           transition={{ duration: 2, repeat: Infinity }}
           className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2"
         >
-          <motion.div className="w-1.5 h-1.5 bg-[#a990b0] rounded-full" />
+          <motion.div className="w-1.5 h-1.5 bg-[#c9b5d0] rounded-full" />
         </motion.div>
       </motion.div>
     </section>

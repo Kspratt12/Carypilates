@@ -34,7 +34,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="py-24 md:py-32 bg-[#8b7093] relative overflow-hidden"
+      className="py-28 md:py-36 bg-[#8b7093] relative overflow-hidden"
       ref={ref}
     >
       <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />

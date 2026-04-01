@@ -110,7 +110,7 @@ export default function Pricing() {
   const [openCategory, setOpenCategory] = useState(0);
 
   return (
-    <section id="pricing" className="py-24 md:py-32 bg-[#faf8fb]" ref={ref}>
+    <section id="pricing" className="py-28 md:py-36 bg-[#faf8fb]" ref={ref}>
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
