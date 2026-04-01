@@ -115,7 +115,7 @@ export default function About() {
             style={{ borderRadius: "20px", overflow: "hidden", boxShadow: "0 20px 60px rgba(139, 58, 139, 0.1)" }}
           >
             <motion.img
-              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Chair.jpg?w=3840&q=100&ssl=1"
+              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Reformer.jpg?w=1200&q=100&ssl=1"
               alt="Pilates chair exercise at Cary Pilates"
               style={{
                 width: "100%",

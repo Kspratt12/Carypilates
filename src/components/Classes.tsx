@@ -12,7 +12,7 @@ const classes = [
     id: "classes",
     title: "Group Reformer",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-013-SQ.jpg?w=3840&q=100&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Class.jpg?w=1200&q=100&ssl=1",
     description:
       "Small group classes limited to just 5 people on premium Balanced Body reformers. Every session is a full-body experience tailored to your level.",
     cta: "View Schedule",
@@ -22,7 +22,7 @@ const classes = [
     id: "private-sessions",
     title: "Private Sessions",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-060-SQ.jpg?w=3840&q=100&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Private-Appts.jpg?w=1200&q=100&ssl=1",
     description:
       "One-on-one sessions designed around your unique goals, body, and pace. Perfect for deepening your practice or addressing specific needs.",
     cta: "Book Private",
@@ -32,7 +32,7 @@ const classes = [
     id: "physical-therapy",
     title: "Physical Therapy",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-096-1.jpg?w=3840&q=100&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-PT.jpg?w=1200&q=100&ssl=1",
     description:
       "Pilates-based physical therapy combining clinical expertise with mindful movement. Recover stronger and move with confidence.",
     cta: "Schedule Evaluation",

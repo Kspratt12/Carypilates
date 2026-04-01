@@ -3,64 +3,14 @@
 import { useRef, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 
-const galleryItems = [
-  {
-    type: "video" as const,
-    src: "/videos/reel1.mp4",
-    alt: "Reformer class in action",
-    span: "tall",
-  },
-  {
-    type: "image" as const,
-    src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-013-SQ.jpg?w=800&q=95&ssl=1",
-    alt: "Group reformer class",
-    span: "normal",
-  },
-  {
-    type: "image" as const,
-    src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-096-1.jpg?w=800&q=95&ssl=1",
-    alt: "Physical therapy session",
-    span: "normal",
-  },
-  {
-    type: "image" as const,
-    src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Lora-SQ.jpg?w=800&q=95&ssl=1",
-    alt: "Lora Guerra instructor",
-    span: "normal",
-  },
-  {
-    type: "video" as const,
-    src: "/videos/reel2.mp4",
-    alt: "Private session demo",
-    span: "normal",
-  },
-  {
-    type: "image" as const,
-    src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Jessica-SQ-1.jpg?w=800&q=95&ssl=1",
-    alt: "Jessica instructor",
-    span: "normal",
-  },
-  {
-    type: "video" as const,
-    src: "/videos/reel3.mp4",
-    alt: "Pilates movement demo",
-    span: "normal",
-  },
-  {
-    type: "video" as const,
-    src: "/videos/post1.mp4",
-    alt: "Studio workout",
-    span: "normal",
-  },
-];
+/*
+  Images sourced from WP media library - ALL unique, none duplicated elsewhere on site.
+  Videos are downloaded reels playing inline.
+*/
 
 function VideoCell({ src, alt }: { src: string; alt: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  const handleMouseEnter = useCallback(() => {
-    videoRef.current?.play().catch(() => {});
-  }, []);
-
+  const handleMouseEnter = useCallback(() => { videoRef.current?.play().catch(() => {}); }, []);
   const handleMouseLeave = useCallback(() => {
     const v = videoRef.current;
     if (v) { v.pause(); v.currentTime = 0; }
@@ -81,25 +31,29 @@ function VideoCell({ src, alt }: { src: string; alt: string }) {
         preload="metadata"
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
       />
-      {/* Play badge */}
       <div style={{
-        position: "absolute",
-        bottom: "10px",
-        left: "10px",
-        width: "30px",
-        height: "30px",
-        borderRadius: "50%",
-        background: "rgba(0,0,0,0.45)",
-        backdropFilter: "blur(4px)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        position: "absolute", bottom: "10px", left: "10px",
+        width: "30px", height: "30px", borderRadius: "50%",
+        background: "rgba(0,0,0,0.45)", backdropFilter: "blur(4px)",
+        display: "flex", alignItems: "center", justifyContent: "center",
       }}>
         <svg style={{ width: "12px", height: "12px", color: "#fff", marginLeft: "2px" }} fill="currentColor" viewBox="0 0 24 24">
           <path d="M8 5v14l11-7z" />
         </svg>
       </div>
     </div>
+  );
+}
+
+function ImageCell({ src, alt }: { src: string; alt: string }) {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }}
+      onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; }}
+      onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+    />
   );
 }
 
@@ -123,7 +77,7 @@ export default function Instagram() {
           </p>
         </motion.div>
 
-        {/* Bento Grid */}
+        {/* Bento Grid - all unique assets */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -131,74 +85,65 @@ export default function Instagram() {
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr 1fr",
-            gridTemplateRows: "200px 200px 200px",
+            gridTemplateRows: "220px 220px 220px",
             gap: "6px",
             borderRadius: "20px",
             overflow: "hidden",
           }}
         >
-          {/* Tall left video - spans 2 rows */}
-          <div style={{ gridRow: "1 / 3", borderRadius: "0", overflow: "hidden" }}>
-            <VideoCell src={galleryItems[0].src} alt={galleryItems[0].alt} />
+          {/* Row 1, Col 1 - Tall video spanning 2 rows */}
+          <div style={{ gridRow: "1 / 3", overflow: "hidden" }}>
+            <VideoCell src="/videos/reel1.mp4" alt="Reformer class in action" />
           </div>
 
-          {/* Top middle - image */}
+          {/* Row 1, Col 2 - Group class (unique: CaryPilates-126) */}
           <div style={{ overflow: "hidden" }}>
-            <img
-              src={galleryItems[1].src}
-              alt={galleryItems[1].alt}
-              style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+            <ImageCell
+              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-126-SQ-1.jpg?w=800&q=95&ssl=1"
+              alt="Group reformer class"
             />
           </div>
 
-          {/* Top right - image */}
+          {/* Row 1, Col 3 - Private session (unique: CaryPilates-042-45) */}
           <div style={{ overflow: "hidden" }}>
-            <img
-              src={galleryItems[2].src}
-              alt={galleryItems[2].alt}
-              style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+            <ImageCell
+              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-042-45-1.jpg?w=800&q=95&ssl=1"
+              alt="Private pilates session"
             />
           </div>
 
-          {/* Middle center - video */}
+          {/* Row 2, Col 2 - Studio reformers (unique: CaryPilates-151) */}
           <div style={{ overflow: "hidden" }}>
-            <VideoCell src={galleryItems[4].src} alt={galleryItems[4].alt} />
-          </div>
-
-          {/* Middle right - image */}
-          <div style={{ overflow: "hidden" }}>
-            <img
-              src={galleryItems[3].src}
-              alt={galleryItems[3].alt}
-              style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+            <ImageCell
+              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-151-SQ.jpg?w=800&q=95&ssl=1"
+              alt="Studio reformer room"
             />
           </div>
 
-          {/* Bottom left - image */}
+          {/* Row 2, Col 3 - Video reel 2 */}
           <div style={{ overflow: "hidden" }}>
-            <img
-              src={galleryItems[5].src}
-              alt={galleryItems[5].alt}
-              style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+            <VideoCell src="/videos/reel2.mp4" alt="Private session demo" />
+          </div>
+
+          {/* Row 3, Col 1 - PT session (unique: CaryPilates-098-45) */}
+          <div style={{ overflow: "hidden" }}>
+            <ImageCell
+              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-098-45.jpg?w=800&q=95&ssl=1"
+              alt="Physical therapy session"
             />
           </div>
 
-          {/* Bottom center - video */}
+          {/* Row 3, Col 2 - Video reel 3 */}
           <div style={{ overflow: "hidden" }}>
-            <VideoCell src={galleryItems[6].src} alt={galleryItems[6].alt} />
+            <VideoCell src="/videos/reel3.mp4" alt="Pilates movement" />
           </div>
 
-          {/* Bottom right - video */}
+          {/* Row 3, Col 3 - Studio wide shot (unique: CaryPilates-055-Hero) */}
           <div style={{ overflow: "hidden" }}>
-            <VideoCell src={galleryItems[7].src} alt={galleryItems[7].alt} />
+            <ImageCell
+              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-055-Hero-1920.jpg?w=800&q=95&ssl=1"
+              alt="Cary Pilates studio"
+            />
           </div>
         </motion.div>
 
