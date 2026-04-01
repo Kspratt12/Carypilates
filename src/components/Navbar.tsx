@@ -57,7 +57,7 @@ export default function Navbar({ onOpenCalendar }: NavbarProps) {
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="max-w-6xl mx-auto px-6 md:px-16 flex items-center justify-between h-20">
+        <div className="max-w-7xl mx-auto px-8 md:px-16 flex items-center justify-between h-16 md:h-20">
           <a
             href="#"
             onClick={(e) => {
@@ -68,7 +68,7 @@ export default function Navbar({ onOpenCalendar }: NavbarProps) {
             <img
               src="https://i0.wp.com/carypilates.com/wp-content/uploads/2024/08/CaryPilates.png?fit=400%2C110&ssl=1"
               alt="Cary Pilates"
-              className={`h-9 w-auto transition-all duration-300 ${
+              className={`h-6 md:h-7 w-auto transition-all duration-300 ${
                 scrolled ? "" : "brightness-0 invert"
               }`}
             />

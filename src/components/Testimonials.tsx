@@ -42,7 +42,7 @@ export default function Testimonials() {
 
   return (
     <section className="py-24 md:py-32 lg:py-40 bg-[#8b7093]" ref={ref}>
-      <div className="max-w-4xl mx-auto px-6 md:px-16 text-center">
+      <div className="max-w-5xl mx-auto px-8 md:px-16 lg:px-24 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}

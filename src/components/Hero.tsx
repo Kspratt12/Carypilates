@@ -29,7 +29,7 @@ export default function Hero({ onOpenCalendar }: HeroProps) {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <div className="relative z-10 text-center px-8 md:px-16 max-w-4xl mx-auto">
         <div className="mb-16">
           {[
             { text: "Find Your ", accent: "Strength." },
@@ -42,7 +42,7 @@ export default function Hero({ onOpenCalendar }: HeroProps) {
               initial="hidden"
               animate="visible"
               variants={lineVariants}
-              className="text-4xl md:text-6xl lg:text-7xl text-white mb-8 font-normal"
+              className="text-3xl md:text-5xl lg:text-6xl text-white mb-6 font-normal"
               style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
             >
               {line.text}
