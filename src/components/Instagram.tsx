@@ -8,7 +8,7 @@ import { motion, useInView } from "framer-motion";
   Videos are downloaded reels playing inline.
 */
 
-function VideoCell({ src, alt, poster }: { src: string; alt: string; poster?: string }) {
+function VideoCell({ src, alt }: { src: string; alt: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -44,12 +44,11 @@ function VideoCell({ src, alt, poster }: { src: string; alt: string; poster?: st
     >
       <video
         ref={videoRef}
-        src={src}
+        src={`${src}#t=0.5`}
         muted
         loop
         playsInline
-        preload="metadata"
-        poster={poster}
+        preload="auto"
         style={{ width: "100%", height: "100%", objectFit: "cover", background: "#2d1b2d" }}
       />
       {/* Play icon overlay - shown when not playing */}
@@ -121,7 +120,6 @@ export default function Instagram() {
             <VideoCell
               src="/videos/reel1.mp4"
               alt="Reformer class in action"
-              poster="/CaryPilates-096-1.png"
             />
           </div>
 
@@ -154,7 +152,6 @@ export default function Instagram() {
             <VideoCell
               src="/videos/reel2.mp4"
               alt="Private session demo"
-              poster="/pilate.png"
             />
           </div>
 
@@ -171,7 +168,6 @@ export default function Instagram() {
             <VideoCell
               src="/videos/reel3.mp4"
               alt="Pilates movement"
-              poster="/CaryPilates-096-1.png"
             />
           </div>
 
