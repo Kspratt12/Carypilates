@@ -66,13 +66,11 @@ export default function Navbar({ onOpenCalendar }: NavbarProps) {
             }}
           >
             <img
-              src={
-                scrolled
-                  ? "https://i0.wp.com/carypilates.com/wp-content/uploads/2024/12/CP-Logo-Full-Horizontal.png?fit=250%2C100&ssl=1"
-                  : "https://i0.wp.com/carypilates.com/wp-content/uploads/2024/12/CP-Logo-Full-Horizontal-White.png?fit=250%2C100&ssl=1"
-              }
+              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2024/08/CaryPilates.png?fit=400%2C110&ssl=1"
               alt="Cary Pilates"
-              className="h-10 w-auto"
+              className={`h-9 w-auto transition-all duration-300 ${
+                scrolled ? "" : "brightness-0 invert"
+              }`}
             />
           </a>
 

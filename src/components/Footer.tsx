@@ -8,7 +8,8 @@ export default function Footer() {
           {/* Brand + Social */}
           <div>
             <img
-              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2024/12/CP-Logo-Full-Horizontal-White.png?fit=250%2C100&ssl=1"
+              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2024/08/CaryPilates.png?fit=400%2C110&ssl=1"
+              style={{ filter: "brightness(0) invert(1)" }}
               alt="Cary Pilates"
               className="h-10 w-auto mb-6"
             />
