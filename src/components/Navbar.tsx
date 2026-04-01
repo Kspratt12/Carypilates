@@ -3,146 +3,165 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+interface NavbarProps {
+  onOpenCalendar: () => void;
+}
+
 const navLinks = [
-  { name: "Group Classes", href: "#classes" },
-  { name: "Private Sessions", href: "#private" },
-  { name: "Physical Therapy", href: "#therapy" },
-  { name: "Instructors", href: "#instructors" },
-  { name: "Pricing", href: "#pricing" },
-  { name: "Contact", href: "#contact" },
+  { label: "Group Classes", href: "#classes" },
+  { label: "Private Sessions", href: "#private-sessions" },
+  { label: "Physical Therapy", href: "#physical-therapy" },
+  { label: "Instructors", href: "#instructors" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Contact", href: "#contact" },
 ];
 
-export default function Navbar({
-  onOpenCalendar,
-}: {
-  onOpenCalendar: () => void;
-}) {
+export default function Navbar({ onOpenCalendar }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  const handleNavClick = (href: string) => {
+    setMobileOpen(false);
+    const el = document.querySelector(href);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-white/95 backdrop-blur-md shadow-sm py-3"
-            : "bg-transparent py-5"
+            ? "bg-white/95 backdrop-blur-md shadow-sm"
+            : "bg-transparent"
         }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6 }}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3">
+        <div className="max-w-6xl mx-auto px-6 md:px-16 flex items-center justify-between h-20">
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
             <img
-              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2024/08/CaryPilates.png?fit=400%2C110&ssl=1"
+              src={
+                scrolled
+                  ? "https://i0.wp.com/carypilates.com/wp-content/uploads/2024/12/CP-Logo-Full-Horizontal.png?fit=250%2C100&ssl=1"
+                  : "https://i0.wp.com/carypilates.com/wp-content/uploads/2024/12/CP-Logo-Full-Horizontal-White.png?fit=250%2C100&ssl=1"
+              }
               alt="Cary Pilates"
-              className={`h-10 w-auto transition-all duration-300 ${
-                scrolled ? "" : "brightness-0 invert"
-              }`}
+              className="h-10 w-auto"
             />
           </a>
 
-          <div className="hidden lg:flex items-center gap-7">
+          {/* Desktop Links */}
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`text-sm font-medium tracking-wide transition-colors duration-300 hover:text-[#8b7093] ${
-                  scrolled ? "text-[#1d1d22]" : "text-white"
+              <button
+                key={link.href}
+                onClick={() => handleNavClick(link.href)}
+                className={`text-[13px] tracking-wide uppercase transition-colors duration-300 bg-transparent border-none cursor-pointer ${
+                  scrolled
+                    ? "text-gray-700 hover:text-[#8b7093]"
+                    : "text-white/90 hover:text-white"
                 }`}
-                style={{ fontFamily: "var(--font-inter)" }}
               >
-                {link.name}
-              </a>
+                {link.label}
+              </button>
             ))}
             <button
               onClick={onOpenCalendar}
-              className="bg-[#8b7093] text-white px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide hover:bg-[#7a6082] transition-all duration-300 hover:shadow-lg hover:shadow-[#8b7093]/25"
-              style={{ fontFamily: "var(--font-inter)" }}
+              className={`ml-4 px-6 py-2.5 text-[13px] tracking-wide uppercase transition-all duration-300 cursor-pointer border-none ${
+                scrolled
+                  ? "bg-[#8b7093] text-white hover:bg-[#6b5674]"
+                  : "bg-white/20 text-white border border-white/40 hover:bg-white/30 backdrop-blur-sm"
+              }`}
             >
               Book Now
             </button>
           </div>
 
+          {/* Mobile Hamburger */}
           <button
+            className="lg:hidden flex flex-col gap-1.5 bg-transparent border-none cursor-pointer p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden flex flex-col gap-1.5 p-2"
             aria-label="Toggle menu"
           >
             <span
-              className={`w-6 h-0.5 transition-all duration-300 ${
-                mobileOpen
-                  ? "rotate-45 translate-y-2 bg-[#1d1d22]"
-                  : scrolled
-                  ? "bg-[#1d1d22]"
-                  : "bg-white"
-              }`}
+              className={`block w-6 h-[2px] transition-all duration-300 ${
+                scrolled ? "bg-gray-800" : "bg-white"
+              } ${mobileOpen ? "rotate-45 translate-y-[5px]" : ""}`}
             />
             <span
-              className={`w-6 h-0.5 transition-all duration-300 ${
-                mobileOpen
-                  ? "opacity-0"
-                  : scrolled
-                  ? "bg-[#1d1d22]"
-                  : "bg-white"
-              }`}
+              className={`block w-6 h-[2px] transition-all duration-300 ${
+                scrolled ? "bg-gray-800" : "bg-white"
+              } ${mobileOpen ? "opacity-0" : ""}`}
             />
             <span
-              className={`w-6 h-0.5 transition-all duration-300 ${
-                mobileOpen
-                  ? "-rotate-45 -translate-y-2 bg-[#1d1d22]"
-                  : scrolled
-                  ? "bg-[#1d1d22]"
-                  : "bg-white"
-              }`}
+              className={`block w-6 h-[2px] transition-all duration-300 ${
+                scrolled ? "bg-gray-800" : "bg-white"
+              } ${mobileOpen ? "-rotate-45 -translate-y-[5px]" : ""}`}
             />
           </button>
         </div>
       </motion.nav>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-white pt-24 px-8 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-white flex flex-col items-center justify-center gap-8"
           >
-            <div className="flex flex-col gap-6">
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  className="text-2xl font-medium text-[#1d1d22] hover:text-[#8b7093] transition-colors"
-                >
-                  {link.name}
-                </motion.a>
-              ))}
-              <motion.button
-                onClick={() => {
-                  setMobileOpen(false);
-                  onOpenCalendar();
-                }}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6 }}
-                className="bg-[#8b7093] text-white px-8 py-4 rounded-full text-lg font-semibold text-center hover:bg-[#7a6082] transition-colors mt-4"
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="absolute top-6 right-6 text-3xl text-gray-800 bg-transparent border-none cursor-pointer"
+              aria-label="Close menu"
+            >
+              &times;
+            </button>
+            {navLinks.map((link) => (
+              <button
+                key={link.href}
+                onClick={() => handleNavClick(link.href)}
+                className="text-lg tracking-widest uppercase text-gray-800 hover:text-[#8b7093] transition-colors bg-transparent border-none cursor-pointer"
               >
-                Book Now
-              </motion.button>
-            </div>
+                {link.label}
+              </button>
+            ))}
+            <button
+              onClick={() => {
+                setMobileOpen(false);
+                onOpenCalendar();
+              }}
+              className="mt-4 px-8 py-4 bg-[#8b7093] text-white text-sm tracking-widest uppercase cursor-pointer border-none"
+            >
+              Book Now
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

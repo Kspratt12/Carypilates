@@ -2,107 +2,103 @@
 
 import { motion } from "framer-motion";
 
-export default function Hero({
-  onOpenCalendar,
-}: {
+interface HeroProps {
   onOpenCalendar: () => void;
-}) {
+}
+
+export default function Hero({ onOpenCalendar }: HeroProps) {
+  const lineVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: 0.3 + i * 0.25, duration: 0.8, ease: "easeOut" as const },
+    }),
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Hero.jpeg?fit=1920%2C1281&ssl=1"
-          alt="Cary Pilates Studio"
+          src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Hero.jpeg?w=1920&q=90&ssl=1"
+          alt="Cary Pilates studio"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+        <div className="absolute inset-0 bg-black/45" />
       </div>
 
-      <div className="relative z-10 text-center px-6 md:px-12 lg:px-16 max-w-4xl mx-auto py-32">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-[#c9b5d0] text-xs md:text-sm tracking-[0.35em] uppercase mb-10"
-          style={{ fontFamily: "var(--font-inter)" }}
-        >
-          Boutique Pilates Studio - Cary, NC
-        </motion.p>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="text-4xl md:text-5xl lg:text-7xl text-white font-light leading-snug mb-5"
-        >
-          Find Your <span className="italic text-[#c9b5d0]">Strength.</span>
-        </motion.h1>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.35 }}
-          className="text-4xl md:text-5xl lg:text-7xl text-white font-light leading-snug mb-5"
-        >
-          Move with <span className="italic text-[#c9b5d0]">Grace.</span>
-        </motion.h1>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="text-4xl md:text-5xl lg:text-7xl text-white font-light leading-snug mb-12"
-        >
-          Live in <span className="italic text-[#c9b5d0]">Balance.</span>
-        </motion.h1>
+      {/* Content */}
+      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+        <div className="mb-16">
+          {[
+            { text: "Find Your ", accent: "Strength." },
+            { text: "Move with ", accent: "Grace." },
+            { text: "Live in ", accent: "Balance." },
+          ].map((line, i) => (
+            <motion.h1
+              key={i}
+              custom={i}
+              initial="hidden"
+              animate="visible"
+              variants={lineVariants}
+              className="text-4xl md:text-6xl lg:text-7xl text-white mb-8 font-normal"
+              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+            >
+              {line.text}
+              <em className="text-[#c9b5d0] italic">{line.accent}</em>
+            </motion.h1>
+          ))}
+        </div>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.65 }}
-          className="text-white/80 text-base md:text-lg max-w-xl mx-auto mb-14"
-          style={{ fontFamily: "var(--font-inter)", lineHeight: 1.9 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
+          className="text-white/80 text-base md:text-lg mb-16 max-w-xl mx-auto"
+          style={{ lineHeight: "1.9" }}
         >
-          A boutique Pilates studio providing a personalized fitness experience
-          in a supportive environment. Small group classes limited to just 5
-          participants.
+          A boutique Pilates studio in Cary, NC offering intimate group classes,
+          private sessions, and Pilates-based physical therapy.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          transition={{ delay: 1.5, duration: 0.6 }}
+          className="flex flex-col sm:flex-row gap-5 justify-center"
         >
           <button
             onClick={onOpenCalendar}
-            className="bg-[#8b7093] text-white px-10 py-4 rounded-full text-sm font-semibold tracking-wider uppercase hover:bg-[#7a6082] transition-all duration-300 hover:shadow-2xl hover:shadow-[#8b7093]/40 hover:-translate-y-1"
-            style={{ fontFamily: "var(--font-inter)" }}
+            className="px-8 py-4 bg-[#8b7093] text-white text-[13px] tracking-widest uppercase hover:bg-[#6b5674] transition-all duration-300 cursor-pointer border-none"
           >
             Try an Intro Session
           </button>
           <a
             href="#classes"
-            className="border-2 border-white/30 text-white px-10 py-4 rounded-full text-sm font-semibold tracking-wider uppercase hover:bg-white hover:text-[#1d1d22] transition-all duration-300 hover:-translate-y-1"
-            style={{ fontFamily: "var(--font-inter)" }}
+            className="px-8 py-4 border border-white/40 text-white text-[13px] tracking-widest uppercase hover:bg-white/10 transition-all duration-300 text-center"
           >
             Explore Classes
           </a>
         </motion.div>
       </div>
 
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        transition={{ delay: 2, duration: 0.8 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+          className="flex flex-col items-center gap-2"
         >
-          <div className="w-1.5 h-1.5 bg-[#c9b5d0] rounded-full" />
+          <span className="text-white/50 text-[11px] tracking-[0.3em] uppercase">
+            Scroll
+          </span>
+          <div className="w-[1px] h-8 bg-white/30" />
         </motion.div>
       </motion.div>
     </section>

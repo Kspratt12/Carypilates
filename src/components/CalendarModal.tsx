@@ -2,13 +2,12 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function CalendarModal({
-  isOpen,
-  onClose,
-}: {
+interface CalendarModalProps {
   isOpen: boolean;
   onClose: () => void;
-}) {
+}
+
+export default function CalendarModal({ isOpen, onClose }: CalendarModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -25,52 +24,32 @@ export default function CalendarModal({
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 40 }}
+            initial={{ opacity: 0, scale: 0.95, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 40 }}
+            exit={{ opacity: 0, scale: 0.95, y: 30 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="fixed inset-4 md:inset-10 lg:inset-16 z-[101] bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+            className="fixed inset-4 md:inset-10 lg:inset-16 z-[101] bg-white shadow-2xl overflow-hidden flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 md:px-8 py-5 border-b border-[#f0edf1]">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-[#8b7093]/10 rounded-full flex items-center justify-center">
-                  <svg
-                    className="w-5 h-5 text-[#8b7093]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.5}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3
-                    className="text-xl font-light text-[#1d1d22]"
-                    style={{ fontFamily: "var(--font-playfair)" }}
-                  >
-                    Book Your <span className="italic text-[#8b7093]">Session</span>
-                  </h3>
-                  <p
-                    className="text-[#6c6c89] text-sm"
-                    style={{ fontFamily: "var(--font-inter)" }}
-                  >
-                    Choose a class or session that works for you
-                  </p>
-                </div>
+            <div className="flex items-center justify-between px-8 py-5 border-b border-gray-100">
+              <div>
+                <h3
+                  className="text-xl"
+                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                >
+                  Book Your Session
+                </h3>
+                <p className="text-gray-500 text-sm mt-1">
+                  Choose a class or session that works for you
+                </p>
               </div>
               <button
                 onClick={onClose}
-                className="w-10 h-10 rounded-full bg-[#faf8fb] hover:bg-[#f0edf1] flex items-center justify-center transition-colors"
+                className="w-10 h-10 bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors cursor-pointer border-none"
                 aria-label="Close calendar"
               >
                 <svg
-                  className="w-5 h-5 text-[#6c6c89]"
+                  className="w-5 h-5 text-gray-600"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -96,30 +75,25 @@ export default function CalendarModal({
             </div>
 
             {/* Footer */}
-            <div className="px-6 md:px-8 py-4 border-t border-[#f0edf1] bg-[#faf8fb] flex flex-col sm:flex-row items-center justify-between gap-3">
-              <p
-                className="text-[#6c6c89] text-sm"
-                style={{ fontFamily: "var(--font-inter)" }}
-              >
+            <div className="px-8 py-4 border-t border-gray-100 bg-[#faf9fb] flex flex-col sm:flex-row items-center justify-between gap-3">
+              <p className="text-gray-500 text-sm">
                 Powered by Momence - Secure online booking
               </p>
-              <div className="flex gap-3">
+              <div className="flex gap-4">
                 <a
                   href="https://momence.com/Cary-Pilates/membership/New-Client-Special---Try-3-Classes/306414"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#8b7093] text-sm font-medium hover:underline"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  className="text-[#8b7093] text-sm font-medium hover:text-[#6b5674] transition-colors"
                 >
                   New Client Special
                 </a>
-                <span className="text-[#d1d1db]">|</span>
+                <span className="text-gray-300">|</span>
                 <a
                   href="https://momence.com/appointments/appointment-reservation/38248?boardId=15636"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#8b7093] text-sm font-medium hover:underline"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  className="text-[#8b7093] text-sm font-medium hover:text-[#6b5674] transition-colors"
                 >
                   PT Evaluation
                 </a>

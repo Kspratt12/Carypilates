@@ -1,118 +1,155 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+
+const featuredInstructor = {
+  name: "Lora Guerra, MPT, NCPT",
+  role: "Studio Owner, Physical Therapist & Pilates Instructor",
+  image:
+    "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Lora-SQ.jpg?w=1000&ssl=1",
+  bio: [
+    "Lora founded Cary Pilates with a simple vision: to create a space where every person feels welcomed, challenged, and empowered through movement.",
+    "As both a licensed Physical Therapist and nationally certified Pilates instructor, Lora brings a rare combination of clinical expertise and movement mastery to every session.",
+    "Her teaching philosophy centers on meeting each person where they are - whether recovering from injury or chasing new fitness goals - and guiding them toward strength, flexibility, and confidence.",
+  ],
+};
 
 const instructors = [
   {
-    name: "Lora Guerra, MPT, NCPT",
-    role: "Studio Owner, Physical Therapist, Pilates Instructor",
-    bio: "A brilliant, thoughtful, and kind Physical Therapist who gives clients confidence in the way they move. Lora's expertise in both PT and Pilates creates a unique, holistic approach to wellness.",
-    image: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Lora-SQ.jpg?w=500&ssl=1",
-    certifications: ["MPT", "NCPT", "Owner"],
-  },
-  {
     name: "Jessica Satterlee, NCPT",
-    role: "Pilates Instructor, Nutrition Coach",
-    bio: "Combining Pilates expertise with nutrition coaching for a comprehensive approach to wellness.",
-    image: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Jessica-SQ-1.jpg?w=500&ssl=1",
+    role: "Pilates Instructor & Nutrition Coach",
+    image:
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Jessica-SQ-1.jpg?w=1000&ssl=1",
+    bio: "Jessica brings energy, precision, and nutrition expertise to every class.",
   },
   {
     name: "Grace Wilson",
     role: "Pilates Instructor",
-    bio: "Brings energy and precision to every session, helping clients discover new levels of strength.",
-    image: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Grace-SQ-1.jpg?w=500&ssl=1",
+    image:
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Grace-SQ-1.jpg?w=1000&ssl=1",
+    bio: "Grace specializes in mindful movement, creating a calm and focused atmosphere.",
   },
   {
     name: "Breanna McLane",
     role: "Pilates Instructor",
-    bio: "Creates challenging yet accessible classes that help clients push their boundaries safely.",
-    image: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/Breanna-SQ.jpg?w=500&ssl=1",
+    image:
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/Breanna-SQ.jpg?w=1000&ssl=1",
+    bio: "Breanna's dynamic teaching style makes challenging workouts feel accessible.",
   },
   {
     name: "Sophia Saylor",
     role: "Pilates Instructor",
-    bio: "Dedicated to helping clients build strength and confidence through precise, intentional movement.",
-    image: "https://i0.wp.com/carypilates.com/wp-content/uploads/2026/01/Sophia.jpg?w=1002&ssl=1",
+    image:
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2026/01/Sophia.jpg?w=1002&ssl=1",
+    bio: "Sophia combines classical technique with modern approaches for every client.",
   },
 ];
 
 export default function Instructors() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="instructors" className="py-28 md:py-36 bg-white" ref={ref}>
-      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
+    <section
+      id="instructors"
+      className="py-24 md:py-32 lg:py-40 bg-white"
+      ref={ref}
+    >
+      <div className="max-w-6xl mx-auto px-6 md:px-16">
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-20"
         >
-          <p className="text-[#8b7093] text-xs tracking-[0.35em] uppercase mb-6" style={{ fontFamily: "var(--font-inter)" }}>
+          <p className="text-xs tracking-[0.3em] uppercase text-[#8b7093] mb-5">
             Meet the Team
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#1d1d22] mb-6">
-            Your <span className="italic text-[#8b7093]">Instructors</span>
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl mb-6"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+          >
+            Our Instructors
           </h2>
-          <p className="text-[#6c6c89] text-base max-w-md mx-auto" style={{ fontFamily: "var(--font-inter)", lineHeight: 2 }}>
-            Our dedicated team brings unique expertise and a commitment to creating a supportive, empowering environment.
+          <p
+            className="text-base text-gray-500 max-w-lg mx-auto"
+            style={{ lineHeight: "1.9" }}
+          >
+            Passionate, certified professionals dedicated to guiding your Pilates
+            journey.
           </p>
         </motion.div>
 
-        {/* Featured - Lora */}
+        {/* Featured: Lora */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.15 }}
-          className="bg-[#faf8fb] rounded-3xl p-8 md:p-12 mb-14"
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="grid md:grid-cols-2 gap-16 items-center mb-24"
         >
-          <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
-            <div className="rounded-2xl overflow-hidden aspect-square max-w-md mx-auto md:max-w-none">
-              <img src={instructors[0].image} alt={instructors[0].name} className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <div className="flex flex-wrap gap-2 mb-5">
-                {instructors[0].certifications?.map((cert) => (
-                  <span key={cert} className="bg-[#8b7093]/10 text-[#8b7093] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide" style={{ fontFamily: "var(--font-inter)" }}>{cert}</span>
-                ))}
-              </div>
-              <h3 className="text-2xl md:text-3xl font-light text-[#1d1d22] mb-2">{instructors[0].name}</h3>
-              <p className="text-[#8b7093] font-medium mb-6 text-sm" style={{ fontFamily: "var(--font-inter)" }}>{instructors[0].role}</p>
-              <p className="text-[#6c6c89] text-base mb-8" style={{ fontFamily: "var(--font-inter)", lineHeight: 2 }}>{instructors[0].bio}</p>
-              <a
-                href="https://momence.com/u/cary-pilates-ddAsiW"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-[#8b7093] text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-[#7a6082] transition-all duration-300 hover:shadow-lg"
-                style={{ fontFamily: "var(--font-inter)" }}
+          <div className="overflow-hidden">
+            <img
+              src={featuredInstructor.image}
+              alt={featuredInstructor.name}
+              className="w-full aspect-square object-cover"
+            />
+          </div>
+          <div>
+            <p className="text-xs tracking-[0.3em] uppercase text-[#8b7093] mb-5">
+              {featuredInstructor.role}
+            </p>
+            <h3
+              className="text-3xl md:text-4xl mb-8"
+              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+            >
+              {featuredInstructor.name}
+            </h3>
+            {featuredInstructor.bio.map((paragraph, i) => (
+              <p
+                key={i}
+                className="text-[15px] text-gray-600 mb-7"
+                style={{ lineHeight: "1.9" }}
               >
-                Book with Lora
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </a>
-            </div>
+                {paragraph}
+              </p>
+            ))}
           </div>
         </motion.div>
 
-        {/* Other Instructors */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {instructors.slice(1).map((instructor, i) => (
+        {/* Other Instructors Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {instructors.map((instructor, i) => (
             <motion.div
               key={instructor.name}
-              initial={{ opacity: 0, y: 25 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 + i * 0.1 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
               className="text-center"
             >
-              <div className="rounded-2xl overflow-hidden aspect-square mb-5">
-                <img src={instructor.image} alt={instructor.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <div className="overflow-hidden mb-6">
+                <img
+                  src={instructor.image}
+                  alt={instructor.name}
+                  className="w-full aspect-square object-cover"
+                />
               </div>
-              <h3 className="text-base md:text-lg font-light text-[#1d1d22] mb-1">{instructor.name}</h3>
-              <p className="text-[#8b7093] text-xs font-medium tracking-wide uppercase mb-3" style={{ fontFamily: "var(--font-inter)" }}>{instructor.role}</p>
-              <p className="text-[#6c6c89] text-xs md:text-sm" style={{ fontFamily: "var(--font-inter)", lineHeight: 1.8 }}>{instructor.bio}</p>
+              <h4
+                className="text-xl mb-2"
+                style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+              >
+                {instructor.name}
+              </h4>
+              <p className="text-xs tracking-[0.15em] uppercase text-[#8b7093] mb-4">
+                {instructor.role}
+              </p>
+              <p
+                className="text-[14px] text-gray-500"
+                style={{ lineHeight: "1.8" }}
+              >
+                {instructor.bio}
+              </p>
             </motion.div>
           ))}
         </div>

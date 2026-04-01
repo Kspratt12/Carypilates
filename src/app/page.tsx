@@ -21,7 +21,7 @@ export default function Home() {
       <Navbar onOpenCalendar={() => setCalendarOpen(true)} />
       <Hero onOpenCalendar={() => setCalendarOpen(true)} />
       <About />
-      <Classes />
+      <Classes onOpenCalendar={() => setCalendarOpen(true)} />
       <Instructors />
       <Testimonials />
       <Pricing />

@@ -1,91 +1,112 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-
-const stats = [
-  { number: "5", label: "Max Class Size", suffix: "" },
-  { number: "50", label: "Minute Sessions", suffix: "min" },
-  { number: "5", label: "Expert Instructors", suffix: "" },
-  { number: "100", label: "Client Satisfaction", suffix: "%" },
-];
+import { motion, useInView } from "framer-motion";
 
 export default function About() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  const stats = [
+    { number: "5", label: "Max Class Size" },
+    { number: "50", label: "Min Sessions" },
+    { number: "5", label: "Instructors" },
+    { number: "100%", label: "Satisfaction" },
+  ];
 
   return (
-    <section id="about" className="py-28 md:py-36 bg-white" ref={ref}>
-      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center mb-24">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
+    <section id="about" className="py-24 md:py-32 lg:py-40 bg-white" ref={ref}>
+      <div className="max-w-6xl mx-auto px-6 md:px-16">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="mb-20"
+        >
+          <p className="text-xs tracking-[0.3em] uppercase text-[#8b7093] mb-5">
+            Our Studio
+          </p>
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl mb-6"
+            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
-            <p className="text-[#8b7093] text-xs tracking-[0.35em] uppercase mb-6" style={{ fontFamily: "var(--font-inter)" }}>
-              Welcome to Cary Pilates
+            Where Wellness Meets Community
+          </h2>
+        </motion.div>
+
+        {/* Two Columns */}
+        <div className="grid md:grid-cols-2 gap-16 items-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            <p
+              className="text-[15px] text-gray-600 mb-8"
+              style={{ lineHeight: "1.9" }}
+            >
+              Cary Pilates is more than a studio - it is a space where you are
+              seen, supported, and challenged to grow. Founded with a passion for
+              mindful movement, we believe Pilates is for every body, at every stage
+              of life.
             </p>
-
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#1d1d22] mb-8">
-              More Than a <span className="italic text-[#8b7093]">Studio</span>
-            </h2>
-
-            <p className="text-[#6c6c89] text-base mb-6" style={{ fontFamily: "var(--font-inter)", lineHeight: 2 }}>
-              Welcome to Cary Pilates, a boutique Pilates studio providing a
-              personalized fitness experience in a supportive environment. Join
-              our small group classes or opt for private sessions tailored to
-              your unique needs.
+            <p
+              className="text-[15px] text-gray-600 mb-8"
+              style={{ lineHeight: "1.9" }}
+            >
+              Our intimate class sizes of just five people mean you will never be
+              lost in a crowd. Every session is guided by expert instructors on
+              premium Balanced Body equipment, ensuring you receive the personalized
+              attention you deserve.
             </p>
-
-            <p className="text-[#6c6c89] text-base mb-10" style={{ fontFamily: "var(--font-inter)", lineHeight: 2 }}>
-              Using Balanced Body Pilates reformers, chairs, towers, and other
-              premium equipment, our sessions help build strength, improve
-              flexibility, and enhance balance.
+            <p
+              className="text-[15px] text-gray-600 mb-10"
+              style={{ lineHeight: "1.9" }}
+            >
+              Whether you are recovering from injury, building strength, or seeking
+              balance in your daily life, we meet you exactly where you are and help
+              you move forward with confidence.
             </p>
-
             <a
               href="https://momence.com/Cary-Pilates/membership/New-Client-Special---Try-3-Classes/306414"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-[#8b7093] text-white px-8 py-4 rounded-full text-sm font-semibold tracking-wide hover:bg-[#7a6082] transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
-              style={{ fontFamily: "var(--font-inter)" }}
+              className="inline-block px-8 py-4 bg-[#8b7093] text-white text-[13px] tracking-widest uppercase hover:bg-[#6b5674] transition-all duration-300"
             >
-              New Client Special - 3 Classes/$96
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
+              New Client Special
             </a>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, x: 40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.4 }}
           >
-            <div className="rounded-3xl overflow-hidden shadow-xl">
-              <img
-                src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Chair.jpg?fit=1200%2C1200&ssl=1"
-                alt="Pilates chair exercise at Cary Pilates"
-                className="w-full aspect-[4/5] object-cover"
-              />
-            </div>
+            <img
+              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Chair.jpg?w=1200&q=90&ssl=1"
+              alt="Pilates chair exercise at Cary Pilates"
+              className="w-full aspect-square object-cover"
+            />
           </motion.div>
         </div>
 
+        {/* Stats Bar */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 bg-[#faf8fb] rounded-3xl p-8 md:p-14"
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.6 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gray-200 pt-16"
         >
-          {stats.map((stat, i) => (
-            <div key={i} className="text-center py-4">
-              <p className="text-4xl md:text-5xl font-light text-[#8b7093] mb-3">
+          {stats.map((stat) => (
+            <div key={stat.label} className="text-center">
+              <p
+                className="text-4xl md:text-5xl text-[#8b7093] mb-3"
+                style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+              >
                 {stat.number}
-                <span className="text-xl">{stat.suffix}</span>
               </p>
-              <p className="text-[#6c6c89] text-xs tracking-widest uppercase" style={{ fontFamily: "var(--font-inter)" }}>
+              <p className="text-[13px] tracking-[0.15em] uppercase text-gray-500">
                 {stat.label}
               </p>
             </div>
