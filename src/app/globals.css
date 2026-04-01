@@ -43,12 +43,6 @@ p {
   line-height: 1.85;
 }
 
-/* Force all sections to have proper inner padding */
-section > div {
-  padding-left: max(2rem, 5vw);
-  padding-right: max(2rem, 5vw);
-}
-
 ::-webkit-scrollbar {
   width: 8px;
 }

@@ -33,33 +33,27 @@ export default function Instagram() {
   }, [isInView]);
 
   return (
-    <section className="py-32 md:py-40 bg-white" ref={ref}>
-      <div className="max-w-5xl mx-auto px-8 md:px-12">
+    <section className="py-28 md:py-36 bg-white" ref={ref}>
+      <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-16">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <p
-            className="text-[#8b7093] text-xs tracking-[0.35em] uppercase mb-6"
-            style={{ fontFamily: "var(--font-inter)" }}
-          >
+          <p className="text-[#8b7093] text-xs tracking-[0.35em] uppercase mb-6" style={{ fontFamily: "var(--font-inter)" }}>
             Follow Along
           </p>
-          <h2
-            className="text-3xl md:text-4xl lg:text-5xl font-light text-[#1d1d22] mb-8"
-            style={{ lineHeight: 1.2 }}
-          >
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#1d1d22]">
             See Us in <span className="italic text-[#8b7093]">Action</span>
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6">
           {reels.map((reel, i) => (
             <motion.div
               key={reel.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               className="flex justify-center"
@@ -68,24 +62,9 @@ export default function Instagram() {
                 className="instagram-media"
                 data-instgrm-permalink={`${reel.url}?utm_source=ig_embed`}
                 data-instgrm-version="14"
-                style={{
-                  background: "#FFF",
-                  border: "1px solid #f0edf1",
-                  borderRadius: "16px",
-                  boxShadow: "none",
-                  margin: 0,
-                  maxWidth: "540px",
-                  width: "100%",
-                  padding: 0,
-                }}
+                style={{ background: "#FFF", border: "1px solid #f0edf1", borderRadius: "16px", boxShadow: "none", margin: 0, maxWidth: "540px", width: "100%", padding: 0 }}
               >
-                <a
-                  href={reel.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block p-6 text-center text-sm text-[#8b7093]"
-                  style={{ fontFamily: "var(--font-inter)" }}
-                >
+                <a href={reel.url} target="_blank" rel="noopener noreferrer" className="block p-6 text-center text-sm text-[#8b7093]" style={{ fontFamily: "var(--font-inter)" }}>
                   View on Instagram
                 </a>
               </blockquote>
@@ -94,10 +73,10 @@ export default function Instagram() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-center mt-16"
+          className="text-center mt-14"
         >
           <a
             href="https://www.instagram.com/carypilates/"

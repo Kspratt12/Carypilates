@@ -33,8 +33,8 @@ const categories = [
   {
     name: "Physical Therapy",
     items: [
-      { name: "PT Evaluation", price: "$150", description: "50 min in-depth evaluation of pain, mobility, and goals", link: "https://momence.com/appointments/appointment-reservation/38248?boardId=15636" },
-      { name: "PT Follow-up", price: "$115", description: "50 min follow-up with hands-on techniques and exercises", link: "https://momence.com/appointments/appointment-reservation/38248?boardId=15636" },
+      { name: "PT Evaluation", price: "$150", description: "50 min evaluation of pain, mobility, and goals", link: "https://momence.com/appointments/appointment-reservation/38248?boardId=15636" },
+      { name: "PT Follow-up", price: "$115", description: "50 min follow-up with hands-on techniques", link: "https://momence.com/appointments/appointment-reservation/38248?boardId=15636" },
     ],
   },
 ];
@@ -45,36 +45,27 @@ export default function Pricing() {
   const [openCategory, setOpenCategory] = useState(0);
 
   return (
-    <section id="pricing" className="py-32 md:py-40 bg-[#faf8fb]" ref={ref}>
-      <div className="max-w-3xl mx-auto px-8 md:px-12">
+    <section id="pricing" className="py-28 md:py-36 bg-[#faf8fb]" ref={ref}>
+      <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-16">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-16 md:mb-20"
         >
-          <p
-            className="text-[#8b7093] text-xs tracking-[0.35em] uppercase mb-6"
-            style={{ fontFamily: "var(--font-inter)" }}
-          >
+          <p className="text-[#8b7093] text-xs tracking-[0.35em] uppercase mb-6" style={{ fontFamily: "var(--font-inter)" }}>
             Investment in You
           </p>
-          <h2
-            className="text-3xl md:text-4xl lg:text-5xl font-light text-[#1d1d22] mb-8"
-            style={{ lineHeight: 1.2 }}
-          >
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#1d1d22] mb-6">
             Our <span className="italic text-[#8b7093]">Pricing</span>
           </h2>
-          <p
-            className="text-[#6c6c89] text-base max-w-md mx-auto"
-            style={{ fontFamily: "var(--font-inter)", lineHeight: 2 }}
-          >
+          <p className="text-[#6c6c89] text-base max-w-sm mx-auto" style={{ fontFamily: "var(--font-inter)", lineHeight: 2 }}>
             Providing value without compromising quality.
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="bg-white rounded-3xl overflow-hidden shadow-sm"
@@ -83,20 +74,15 @@ export default function Pricing() {
             <div key={cat.name} className="border-b border-[#f0edf1] last:border-b-0">
               <button
                 onClick={() => setOpenCategory(openCategory === catIndex ? -1 : catIndex)}
-                className="w-full flex items-center justify-between p-7 md:p-8 hover:bg-[#faf8fb]/50 transition-colors text-left"
+                className="w-full flex items-center justify-between p-6 md:p-7 hover:bg-[#faf8fb]/50 transition-colors text-left"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
-                <span className="text-base font-medium text-[#1d1d22]">
-                  {cat.name}
-                </span>
+                <span className="text-sm md:text-base font-medium text-[#1d1d22]">{cat.name}</span>
                 <motion.svg
                   animate={{ rotate: openCategory === catIndex ? 45 : 0 }}
                   transition={{ duration: 0.3 }}
                   className="w-5 h-5 text-[#8b7093] flex-shrink-0 ml-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </motion.svg>
@@ -111,32 +97,25 @@ export default function Pricing() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-7 md:px-8 pb-8 space-y-4">
+                    <div className="px-6 md:px-7 pb-6 space-y-3">
                       {cat.items.map((item) => (
                         <a
                           key={item.name}
                           href={item.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="block p-5 rounded-xl bg-[#faf8fb] hover:bg-[#f0edf1] transition-colors"
+                          className="flex items-center justify-between p-4 md:p-5 rounded-xl bg-[#faf8fb] hover:bg-[#f0edf1] transition-colors group"
                         >
-                          <div className="flex items-center justify-between mb-2">
-                            <h4
-                              className="font-semibold text-sm text-[#1d1d22]"
-                              style={{ fontFamily: "var(--font-inter)" }}
-                            >
-                              {item.name}
-                            </h4>
-                            <span className="text-xl font-light text-[#8b7093] ml-4">
-                              {item.price}
-                            </span>
+                          <div className="flex-1 mr-4">
+                            <h4 className="font-semibold text-sm text-[#1d1d22] mb-1" style={{ fontFamily: "var(--font-inter)" }}>{item.name}</h4>
+                            <p className="text-[#6c6c89] text-xs" style={{ fontFamily: "var(--font-inter)" }}>{item.description}</p>
                           </div>
-                          <p
-                            className="text-[#6c6c89] text-xs"
-                            style={{ fontFamily: "var(--font-inter)", lineHeight: 1.8 }}
-                          >
-                            {item.description}
-                          </p>
+                          <div className="flex items-center gap-3 flex-shrink-0">
+                            <span className="text-xl font-light text-[#8b7093]">{item.price}</span>
+                            <svg className="w-4 h-4 text-[#8b7093] opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                            </svg>
+                          </div>
                         </a>
                       ))}
                     </div>
