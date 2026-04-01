@@ -37,7 +37,7 @@ const faqs = [
 export default function FAQ() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <section className="cp-section" style={{ background: "#fff" }} ref={ref}>
