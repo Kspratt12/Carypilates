@@ -57,7 +57,7 @@ export default function Navbar({ onOpenCalendar }: NavbarProps) {
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="max-w-7xl mx-auto px-8 md:px-16 flex items-center justify-between h-16 md:h-20">
+        <div className="max-w-6xl mx-auto px-6 md:px-8 flex items-center justify-between h-16 md:h-[72px]">
           <a
             href="#"
             onClick={(e) => {
@@ -68,22 +68,22 @@ export default function Navbar({ onOpenCalendar }: NavbarProps) {
             <img
               src="https://i0.wp.com/carypilates.com/wp-content/uploads/2024/08/CaryPilates.png?fit=400%2C110&ssl=1"
               alt="Cary Pilates"
-              className={`h-6 md:h-7 w-auto transition-all duration-300 ${
+              className={`h-5 md:h-6 w-auto transition-all duration-300 ${
                 scrolled ? "" : "brightness-0 invert"
               }`}
             />
           </a>
 
           {/* Desktop Links */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-7">
             {navLinks.map((link) => (
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 bg-transparent border-none cursor-pointer ${
+                className={`text-[11px] tracking-[0.12em] uppercase transition-colors duration-300 bg-transparent border-none cursor-pointer relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1px] hover:after:w-full after:transition-all after:duration-300 ${
                   scrolled
-                    ? "text-gray-700 hover:text-[#8b7093]"
-                    : "text-white/90 hover:text-white"
+                    ? "text-gray-600 hover:text-[#8b7093] after:bg-[#8b7093]"
+                    : "text-white/90 hover:text-white after:bg-white"
                 }`}
               >
                 {link.label}
@@ -91,10 +91,10 @@ export default function Navbar({ onOpenCalendar }: NavbarProps) {
             ))}
             <button
               onClick={onOpenCalendar}
-              className={`ml-4 px-6 py-2.5 text-[11px] tracking-[0.15em] uppercase transition-all duration-300 cursor-pointer border-none ${
+              className={`ml-3 px-5 py-2 text-[11px] tracking-[0.12em] uppercase transition-all duration-300 cursor-pointer rounded-full ${
                 scrolled
-                  ? "bg-[#8b7093] text-white hover:bg-[#6b5674]"
-                  : "bg-white/20 text-white border border-white/40 hover:bg-white/30 backdrop-blur-sm"
+                  ? "bg-[#8b7093] text-white hover:bg-[#6b5674] border-none hover:shadow-lg"
+                  : "bg-white/15 text-white border border-white/30 hover:bg-white/25 backdrop-blur-sm"
               }`}
             >
               Book Now

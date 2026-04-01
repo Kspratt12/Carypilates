@@ -8,33 +8,33 @@ export default function Contact() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contact" className="py-24 md:py-32 lg:py-40 bg-[#faf9fb]" ref={ref}>
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
+    <section id="contact" className="py-20 md:py-28 lg:py-36 bg-[#faf9fb]" ref={ref}>
+      <div className="max-w-6xl mx-auto px-6 md:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-20"
+          className="text-center mb-14"
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-[#8b7093] mb-5">
+          <p className="text-xs tracking-[0.3em] uppercase text-[#8b7093] mb-4">
             Visit Us
           </p>
           <h2
-            className="text-3xl md:text-4xl lg:text-5xl mb-6"
+            className="text-3xl md:text-4xl lg:text-[2.8rem] mb-5"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             Get in Touch
           </h2>
           <p
-            className="text-base text-gray-500 max-w-lg mx-auto"
-            style={{ lineHeight: "1.9" }}
+            className="text-[15px] text-gray-500 max-w-md mx-auto"
+            style={{ lineHeight: "1.8" }}
           >
             We would love to hear from you. Stop by, call, or send us a message.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-16">
+        <div className="grid md:grid-cols-2 gap-12">
           {/* Left - Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -44,7 +44,7 @@ export default function Contact() {
           >
             {/* Location */}
             <div className="flex gap-5">
-              <div className="w-12 h-12 bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <div className="w-11 h-11 bg-white flex items-center justify-center flex-shrink-0 shadow-sm rounded-xl">
                 <svg
                   className="w-5 h-5 text-[#8b7093]"
                   fill="none"
@@ -84,7 +84,7 @@ export default function Contact() {
 
             {/* Phone */}
             <div className="flex gap-5">
-              <div className="w-12 h-12 bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <div className="w-11 h-11 bg-white flex items-center justify-center flex-shrink-0 shadow-sm rounded-xl">
                 <svg
                   className="w-5 h-5 text-[#8b7093]"
                   fill="none"
@@ -117,7 +117,7 @@ export default function Contact() {
 
             {/* Email */}
             <div className="flex gap-5">
-              <div className="w-12 h-12 bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <div className="w-11 h-11 bg-white flex items-center justify-center flex-shrink-0 shadow-sm rounded-xl">
                 <svg
                   className="w-5 h-5 text-[#8b7093]"
                   fill="none"
@@ -150,7 +150,7 @@ export default function Contact() {
 
             {/* Hours */}
             <div className="flex gap-5">
-              <div className="w-12 h-12 bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <div className="w-11 h-11 bg-white flex items-center justify-center flex-shrink-0 shadow-sm rounded-xl">
                 <svg
                   className="w-5 h-5 text-[#8b7093]"
                   fill="none"
@@ -192,7 +192,7 @@ export default function Contact() {
             className="space-y-8"
           >
             {/* Map */}
-            <div className="overflow-hidden h-[250px]">
+            <div className="overflow-hidden h-[250px] rounded-2xl">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3237.5!2d-78.87!3d35.82!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s800+Gathering+Park+Circle+Cary+NC+27519!5e0!3m2!1sen!2sus!4v1"
                 width="100%"
@@ -205,7 +205,7 @@ export default function Contact() {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-white p-8">
+            <div className="bg-white p-8 rounded-2xl shadow-sm">
               <h3
                 className="text-2xl mb-8"
                 style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
@@ -220,27 +220,27 @@ export default function Contact() {
                   <input
                     type="text"
                     placeholder="First Name"
-                    className="w-full px-5 py-4 border border-gray-200 bg-[#faf9fb] text-[15px] placeholder:text-gray-400 focus:outline-none focus:border-[#8b7093] transition-colors"
+                    className="w-full px-5 py-3.5 border border-gray-200 bg-[#faf9fb] text-[14px] placeholder:text-gray-400 focus:outline-none focus:border-[#8b7093] transition-colors rounded-lg"
                   />
                   <input
                     type="text"
                     placeholder="Last Name"
-                    className="w-full px-5 py-4 border border-gray-200 bg-[#faf9fb] text-[15px] placeholder:text-gray-400 focus:outline-none focus:border-[#8b7093] transition-colors"
+                    className="w-full px-5 py-3.5 border border-gray-200 bg-[#faf9fb] text-[14px] placeholder:text-gray-400 focus:outline-none focus:border-[#8b7093] transition-colors rounded-lg"
                   />
                 </div>
                 <input
                   type="email"
                   placeholder="Email Address"
-                  className="w-full px-5 py-4 border border-gray-200 bg-[#faf9fb] text-[15px] placeholder:text-gray-400 focus:outline-none focus:border-[#8b7093] transition-colors"
+                  className="w-full px-5 py-3.5 border border-gray-200 bg-[#faf9fb] text-[14px] placeholder:text-gray-400 focus:outline-none focus:border-[#8b7093] transition-colors rounded-lg"
                 />
                 <textarea
                   placeholder="Your Message"
                   rows={4}
-                  className="w-full px-5 py-4 border border-gray-200 bg-[#faf9fb] text-[15px] placeholder:text-gray-400 focus:outline-none focus:border-[#8b7093] transition-colors resize-none"
+                  className="w-full px-5 py-3.5 border border-gray-200 bg-[#faf9fb] text-[14px] placeholder:text-gray-400 focus:outline-none focus:border-[#8b7093] transition-colors resize-none rounded-lg"
                 />
                 <button
                   type="submit"
-                  className="w-full px-8 py-4 bg-[#8b7093] text-white text-[13px] tracking-widest uppercase hover:bg-[#6b5674] transition-all duration-300 cursor-pointer border-none"
+                  className="w-full px-7 py-3.5 bg-[#8b7093] text-white text-[12px] tracking-widest uppercase hover:bg-[#6b5674] transition-all duration-300 cursor-pointer border-none rounded-full hover:shadow-lg"
                 >
                   Send Message
                 </button>

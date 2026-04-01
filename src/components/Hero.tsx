@@ -29,8 +29,8 @@ export default function Hero({ onOpenCalendar }: HeroProps) {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-8 md:px-16 max-w-4xl mx-auto">
-        <div className="mb-16">
+      <div className="relative z-10 text-center px-6 md:px-8 max-w-3xl mx-auto">
+        <div className="mb-12">
           {[
             { text: "Find Your ", accent: "Strength." },
             { text: "Move with ", accent: "Grace." },
@@ -42,7 +42,7 @@ export default function Hero({ onOpenCalendar }: HeroProps) {
               initial="hidden"
               animate="visible"
               variants={lineVariants}
-              className="text-3xl md:text-5xl lg:text-6xl text-white mb-6 font-normal"
+              className="text-3xl md:text-5xl lg:text-[3.5rem] text-white mb-4 font-normal"
               style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
             >
               {line.text}
@@ -55,8 +55,8 @@ export default function Hero({ onOpenCalendar }: HeroProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          className="text-white/80 text-base md:text-lg mb-16 max-w-xl mx-auto"
-          style={{ lineHeight: "1.9" }}
+          className="text-white/75 text-[15px] md:text-base mb-12 max-w-md mx-auto"
+          style={{ lineHeight: "1.8" }}
         >
           A boutique Pilates studio in Cary, NC offering intimate group classes,
           private sessions, and Pilates-based physical therapy.
@@ -66,17 +66,17 @@ export default function Hero({ onOpenCalendar }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.6 }}
-          className="flex flex-col sm:flex-row gap-5 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <button
             onClick={onOpenCalendar}
-            className="px-8 py-4 bg-[#8b7093] text-white text-[13px] tracking-widest uppercase hover:bg-[#6b5674] transition-all duration-300 cursor-pointer border-none"
+            className="px-7 py-3.5 bg-[#8b7093] text-white text-[12px] tracking-widest uppercase hover:bg-[#6b5674] transition-all duration-300 cursor-pointer border-none rounded-full hover:shadow-lg hover:-translate-y-0.5"
           >
             Try an Intro Session
           </button>
           <a
             href="#classes"
-            className="px-8 py-4 border border-white/40 text-white text-[13px] tracking-widest uppercase hover:bg-white/10 transition-all duration-300 text-center"
+            className="px-7 py-3.5 border border-white/30 text-white text-[12px] tracking-widest uppercase hover:bg-white/10 transition-all duration-300 text-center rounded-full"
           >
             Explore Classes
           </a>

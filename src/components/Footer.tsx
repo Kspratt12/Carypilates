@@ -2,16 +2,16 @@
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1a1a1a] text-white py-20">
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
-        <div className="grid md:grid-cols-3 gap-12 mb-16">
+    <footer className="bg-[#1a1a1a] text-white py-16">
+      <div className="max-w-6xl mx-auto px-6 md:px-8">
+        <div className="grid md:grid-cols-3 gap-10 mb-14">
           {/* Brand + Social */}
           <div>
             <img
               src="https://i0.wp.com/carypilates.com/wp-content/uploads/2024/08/CaryPilates.png?fit=400%2C110&ssl=1"
               style={{ filter: "brightness(0) invert(1)" }}
               alt="Cary Pilates"
-              className="h-10 w-auto mb-6"
+              className="h-6 w-auto mb-5"
             />
             <p
               className="text-white/50 text-[15px] mb-8"
@@ -25,7 +25,7 @@ export default function Footer() {
                 href="https://www.facebook.com/CaryPilates/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 flex items-center justify-center text-white/60 hover:bg-[#8b7093] hover:text-white transition-all duration-300"
+                className="w-9 h-9 bg-white/10 flex items-center justify-center text-white/60 hover:bg-[#8b7093] hover:text-white transition-all duration-300 rounded-full"
                 aria-label="Facebook"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -36,7 +36,7 @@ export default function Footer() {
                 href="https://www.instagram.com/carypilates/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 flex items-center justify-center text-white/60 hover:bg-[#8b7093] hover:text-white transition-all duration-300"
+                className="w-9 h-9 bg-white/10 flex items-center justify-center text-white/60 hover:bg-[#8b7093] hover:text-white transition-all duration-300 rounded-full"
                 aria-label="Instagram"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">

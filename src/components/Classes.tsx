@@ -45,27 +45,27 @@ export default function Classes({ onOpenCalendar }: ClassesProps) {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-32 lg:py-40 bg-[#faf9fb]" ref={ref}>
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
+    <section className="py-20 md:py-28 lg:py-36 bg-[#faf9fb]" ref={ref}>
+      <div className="max-w-6xl mx-auto px-6 md:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-20"
+          className="text-center mb-14"
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-[#8b7093] mb-5">
+          <p className="text-xs tracking-[0.3em] uppercase text-[#8b7093] mb-4">
             What We Offer
           </p>
           <h2
-            className="text-3xl md:text-4xl lg:text-5xl mb-6"
+            className="text-3xl md:text-4xl lg:text-[2.8rem] mb-5"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             Our Classes
           </h2>
           <p
-            className="text-base text-gray-500 max-w-lg mx-auto"
-            style={{ lineHeight: "1.9" }}
+            className="text-[15px] text-gray-500 max-w-md mx-auto"
+            style={{ lineHeight: "1.8" }}
           >
             Three distinct paths to help you find the movement practice that fits
             your life.
@@ -73,7 +73,7 @@ export default function Classes({ onOpenCalendar }: ClassesProps) {
         </motion.div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-3 gap-7">
           {classes.map((cls, i) => (
             <motion.div
               key={cls.id}
@@ -81,25 +81,25 @@ export default function Classes({ onOpenCalendar }: ClassesProps) {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.2 + i * 0.15 }}
-              className="bg-white overflow-hidden group"
+              className="bg-white overflow-hidden group rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
             >
               <div className="overflow-hidden">
                 <img
                   src={cls.image}
                   alt={cls.title}
-                  className="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <div className="p-8">
+              <div className="p-7">
                 <h3
-                  className="text-2xl mb-4"
+                  className="text-xl mb-3"
                   style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
                 >
                   {cls.title}
                 </h3>
                 <p
-                  className="text-[15px] text-gray-600 mb-8"
-                  style={{ lineHeight: "1.9" }}
+                  className="text-[14px] text-gray-500 mb-6"
+                  style={{ lineHeight: "1.7" }}
                 >
                   {cls.description}
                 </p>
@@ -107,7 +107,7 @@ export default function Classes({ onOpenCalendar }: ClassesProps) {
                   href={cls.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block text-[13px] tracking-[0.2em] uppercase text-[#8b7093] border-b border-[#8b7093] pb-1 hover:text-[#6b5674] hover:border-[#6b5674] transition-colors duration-300"
+                  className="inline-block text-[12px] tracking-[0.15em] uppercase text-[#8b7093] border-b border-[#8b7093] pb-1 hover:text-[#6b5674] hover:border-[#6b5674] transition-colors duration-300"
                 >
                   {cls.cta}
                 </a>

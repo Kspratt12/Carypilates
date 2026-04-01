@@ -54,26 +54,26 @@ export default function Pricing() {
   const [openCategory, setOpenCategory] = useState(0);
 
   return (
-    <section id="pricing" className="py-24 md:py-32 lg:py-40 bg-[#faf9fb]" ref={ref}>
-      <div className="max-w-5xl mx-auto px-8 md:px-16 lg:px-24">
+    <section id="pricing" className="py-20 md:py-28 lg:py-36 bg-[#faf9fb]" ref={ref}>
+      <div className="max-w-4xl mx-auto px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-20"
+          className="text-center mb-14"
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-[#8b7093] mb-5">
+          <p className="text-xs tracking-[0.3em] uppercase text-[#8b7093] mb-4">
             Investment in You
           </p>
           <h2
-            className="text-3xl md:text-4xl lg:text-5xl mb-6"
+            className="text-3xl md:text-4xl lg:text-[2.8rem] mb-5"
             style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
           >
             Our Pricing
           </h2>
           <p
-            className="text-[15px] text-gray-500 max-w-lg mx-auto"
-            style={{ lineHeight: "1.9" }}
+            className="text-[15px] text-gray-500 max-w-md mx-auto"
+            style={{ lineHeight: "1.8" }}
           >
             Transparent pricing. Save more when you commit to your practice.
           </p>
@@ -84,7 +84,7 @@ export default function Pricing() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="grid md:grid-cols-2 gap-6 mb-16"
+          className="grid md:grid-cols-2 gap-6 mb-14"
         >
           {introOffers.map((offer) => (
             <a
@@ -92,10 +92,10 @@ export default function Pricing() {
               href={offer.link}
               target="_blank"
               rel="noopener noreferrer"
-              className={`block p-10 text-center transition-all duration-300 hover:-translate-y-1 ${
+              className={`block p-10 text-center transition-all duration-500 hover:-translate-y-1 rounded-2xl ${
                 offer.popular
                   ? "bg-[#8b7093] text-white hover:shadow-xl"
-                  : "bg-white text-gray-900 hover:shadow-lg"
+                  : "bg-white text-gray-900 hover:shadow-lg shadow-sm"
               }`}
             >
               <p className={`text-xs tracking-[0.3em] uppercase mb-4 ${offer.popular ? "text-white/70" : "text-[#8b7093]"}`}>
@@ -131,7 +131,7 @@ export default function Pricing() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="bg-white overflow-hidden"
+          className="bg-white overflow-hidden rounded-2xl shadow-sm"
         >
           {categories.map((cat, catIndex) => (
             <div key={cat.name} className="border-b border-gray-100 last:border-b-0">
@@ -171,7 +171,7 @@ export default function Pricing() {
                           href="https://momence.com/u/cary-pilates-ddAsiW"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-between p-5 bg-[#faf9fb] hover:bg-[#f0edf1] transition-colors group"
+                          className="flex items-center justify-between p-5 bg-[#faf9fb] hover:bg-[#f0edf1] transition-colors group rounded-xl"
                         >
                           <div>
                             <h4 className="text-[15px] font-medium text-gray-900 mb-1">{item.name}</h4>
