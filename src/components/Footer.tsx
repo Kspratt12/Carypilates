@@ -181,6 +181,69 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Newsletter */}
+        <div style={{
+          borderTop: "1px solid rgba(255,255,255,0.08)",
+          paddingTop: "40px",
+          marginBottom: "40px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "24px",
+        }}>
+          <div>
+            <h4 style={{ color: "#fff", fontSize: "1rem", marginBottom: "6px", fontFamily: "var(--font-playfair), Georgia, serif" }}>
+              Stay in the Loop
+            </h4>
+            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.85rem" }}>
+              Studio updates, wellness tips, and exclusive offers.
+            </p>
+          </div>
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            style={{ display: "flex", gap: "8px" }}
+          >
+            <input
+              type="email"
+              placeholder="Your email"
+              style={{
+                padding: "12px 20px",
+                borderRadius: "50px",
+                border: "1px solid rgba(255,255,255,0.15)",
+                background: "rgba(255,255,255,0.06)",
+                color: "#fff",
+                fontSize: "0.85rem",
+                outline: "none",
+                width: "240px",
+                fontFamily: "inherit",
+                transition: "border-color 0.3s",
+              }}
+              onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(201,181,208,0.5)"; }}
+              onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; }}
+            />
+            <button
+              type="submit"
+              style={{
+                padding: "12px 24px",
+                borderRadius: "50px",
+                background: "#8b7093",
+                color: "#fff",
+                border: "none",
+                fontSize: "0.82rem",
+                fontWeight: 600,
+                cursor: "pointer",
+                transition: "background 0.3s",
+                fontFamily: "inherit",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#6b5674"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "#8b7093"; }}
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+
         {/* Bottom */}
         <div
           style={{
