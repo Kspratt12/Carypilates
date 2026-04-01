@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
 const stats = [
   { number: 5, suffix: "", label: "Max Class Size" },
@@ -51,9 +51,15 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true, margin: "-50px" });
+  const imageRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: imageRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <section id="about" className="cp-section" style={{ background: "#faf8fb" }} ref={ref}>
+    <section id="about" className="cp-section" style={{ background: "#faf8fb", position: "relative", zIndex: 1 }} ref={ref}>
       <div className="cp-container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -102,19 +108,20 @@ export default function About() {
           </motion.div>
 
           <motion.div
+            ref={imageRef}
             initial={{ opacity: 0, x: 40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.4 }}
+            style={{ borderRadius: "20px", overflow: "hidden", boxShadow: "0 20px 60px rgba(139, 58, 139, 0.1)" }}
           >
-            <img
+            <motion.img
               src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Chair.jpg?w=3840&q=100&ssl=1"
               alt="Pilates chair exercise at Cary Pilates"
               style={{
                 width: "100%",
-                aspectRatio: "1",
+                height: "120%",
                 objectFit: "cover",
-                borderRadius: "20px",
-                boxShadow: "0 20px 60px rgba(139, 58, 139, 0.1)",
+                y: imageY,
               }}
             />
           </motion.div>

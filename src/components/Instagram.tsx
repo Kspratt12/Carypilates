@@ -8,21 +8,25 @@ const galleryImages = [
     src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-013-SQ.jpg?w=3840&q=100&ssl=1",
     alt: "Group reformer class",
     link: "https://www.instagram.com/reel/CzJlUZQg3GZ/",
+    isVideo: true,
   },
   {
     src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-060-SQ.jpg?w=3840&q=100&ssl=1",
     alt: "Private pilates session",
     link: "https://www.instagram.com/reel/Cu48tWqAcGq/",
+    isVideo: true,
   },
   {
     src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Chair.jpg?w=3840&q=100&ssl=1",
     alt: "Pilates chair exercise",
     link: "https://www.instagram.com/reel/CuqMMqhASDt/",
+    isVideo: true,
   },
   {
     src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Hero.jpeg?w=3840&q=100&ssl=1",
     alt: "Studio interior",
     link: "https://www.instagram.com/p/COQp4QsAXbj/",
+    isVideo: false,
   },
 ];
 
@@ -46,7 +50,6 @@ export default function Instagram() {
           </p>
         </motion.div>
 
-        {/* Clean image grid - no embed clutter */}
         <div className="cp-grid-4">
           {galleryImages.map((img, i) => (
             <motion.a
@@ -76,21 +79,51 @@ export default function Instagram() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "scale(1.08)";
-                  const overlay = e.currentTarget.nextElementSibling as HTMLElement;
+                  const overlay = e.currentTarget.parentElement?.querySelector(
+                    "[data-overlay]"
+                  ) as HTMLElement;
                   if (overlay) overlay.style.opacity = "1";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "scale(1)";
-                  const overlay = e.currentTarget.nextElementSibling as HTMLElement;
+                  const overlay = e.currentTarget.parentElement?.querySelector(
+                    "[data-overlay]"
+                  ) as HTMLElement;
                   if (overlay) overlay.style.opacity = "0";
                 }}
               />
-              {/* Hover overlay with Instagram icon */}
+
+              {/* Play icon for videos */}
+              {img.isVideo && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "12px",
+                    right: "12px",
+                    width: "32px",
+                    height: "32px",
+                    borderRadius: "50%",
+                    background: "rgba(0,0,0,0.5)",
+                    backdropFilter: "blur(4px)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    pointerEvents: "none",
+                  }}
+                >
+                  <svg style={{ width: "14px", height: "14px", color: "#fff", marginLeft: "2px" }} fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              )}
+
+              {/* Hover overlay */}
               <div
+                data-overlay
                 style={{
                   position: "absolute",
                   inset: 0,
-                  background: "rgba(139,112,147,0.4)",
+                  background: "rgba(139,112,147,0.45)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -99,13 +132,32 @@ export default function Instagram() {
                   pointerEvents: "none",
                 }}
               >
-                <svg
-                  style={{ width: "32px", height: "32px", color: "#fff" }}
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                </svg>
+                {img.isVideo ? (
+                  <div
+                    style={{
+                      width: "56px",
+                      height: "56px",
+                      borderRadius: "50%",
+                      background: "rgba(255,255,255,0.25)",
+                      backdropFilter: "blur(8px)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <svg style={{ width: "24px", height: "24px", color: "#fff", marginLeft: "3px" }} fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                ) : (
+                  <svg
+                    style={{ width: "32px", height: "32px", color: "#fff" }}
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                  </svg>
+                )}
               </div>
             </motion.a>
           ))}
