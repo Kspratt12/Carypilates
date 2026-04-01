@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 const reels = [
   {
@@ -25,29 +25,45 @@ const reels = [
 export default function Instagram() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // Load Instagram embed script
-    if (typeof window !== "undefined") {
-      const existingScript = document.querySelector(
-        'script[src="https://www.instagram.com/embed.js"]'
-      );
-      if (!existingScript) {
-        const script = document.createElement("script");
-        script.src = "https://www.instagram.com/embed.js";
-        script.async = true;
-        document.body.appendChild(script);
-      } else {
-        // Re-process embeds if script already loaded
-        (window as unknown as { instgrm?: { Embeds: { process: () => void } } })
-          .instgrm?.Embeds?.process();
+    if (!isInView || loaded) return;
+
+    const timer = setTimeout(() => {
+      if (typeof window !== "undefined") {
+        const existingScript = document.querySelector(
+          'script[src="https://www.instagram.com/embed.js"]'
+        );
+        if (!existingScript) {
+          const script = document.createElement("script");
+          script.src = "https://www.instagram.com/embed.js";
+          script.async = true;
+          script.onload = () => {
+            (
+              window as unknown as {
+                instgrm?: { Embeds: { process: () => void } };
+              }
+            ).instgrm?.Embeds?.process();
+          };
+          document.body.appendChild(script);
+        } else {
+          (
+            window as unknown as {
+              instgrm?: { Embeds: { process: () => void } };
+            }
+          ).instgrm?.Embeds?.process();
+        }
+        setLoaded(true);
       }
-    }
-  }, []);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [isInView, loaded]);
 
   return (
     <section className="py-24 md:py-32 bg-[#faf8fb]" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -73,8 +89,8 @@ export default function Instagram() {
           </p>
         </motion.div>
 
-        {/* Instagram Embeds Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Instagram Embeds - 2x2 Grid */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {reels.map((reel, i) => (
             <motion.div
               key={reel.id}
@@ -90,26 +106,25 @@ export default function Instagram() {
                 data-instgrm-version="14"
                 style={{
                   background: "#FFF",
-                  border: 0,
+                  border: "1px solid #f0edf1",
                   borderRadius: "16px",
-                  boxShadow: "none",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
                   margin: 0,
-                  maxWidth: "100%",
-                  minWidth: "280px",
-                  padding: 0,
+                  maxWidth: "540px",
                   width: "100%",
+                  padding: 0,
                 }}
               >
                 <a
                   href={reel.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block p-6 text-center"
+                  className="block p-8 text-center"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
-                  <div className="flex items-center justify-center w-full h-48 bg-[#faf8fb] rounded-xl mb-4">
+                  <div className="flex flex-col items-center justify-center w-full py-12 bg-[#faf8fb] rounded-xl mb-4">
                     <svg
-                      className="w-10 h-10 text-[#8b7093]"
+                      className="w-12 h-12 text-[#8b7093] mb-3"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -121,6 +136,7 @@ export default function Instagram() {
                         d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
                       />
                     </svg>
+                    <p className="text-[#6c6c89] text-sm">Loading video...</p>
                   </div>
                   <p className="text-[#8b7093] text-sm font-medium">
                     View on Instagram
@@ -136,7 +152,7 @@ export default function Instagram() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center mt-12"
+          className="text-center mt-14"
         >
           <a
             href="https://www.instagram.com/carypilates/"
