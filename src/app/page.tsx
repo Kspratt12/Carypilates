@@ -8,6 +8,7 @@ import Classes from "@/components/Classes";
 import Instructors from "@/components/Instructors";
 import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
+import Marquee from "@/components/Marquee";
 import Instagram from "@/components/Instagram";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -20,6 +21,7 @@ export default function Home() {
     <main>
       <Navbar onOpenCalendar={() => setCalendarOpen(true)} />
       <Hero onOpenCalendar={() => setCalendarOpen(true)} />
+      <Marquee />
       <About />
       <Classes onOpenCalendar={() => setCalendarOpen(true)} />
       <Instructors />

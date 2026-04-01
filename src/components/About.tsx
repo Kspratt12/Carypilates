@@ -1,18 +1,56 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const stats = [
-  { number: "5", label: "Max Class Size" },
-  { number: "50", label: "Min Sessions" },
-  { number: "5", label: "Instructors" },
-  { number: "100%", label: "Satisfaction" },
+  { number: 5, suffix: "", label: "Max Class Size" },
+  { number: 50, suffix: "+", label: "Min Sessions" },
+  { number: 5, suffix: "", label: "Instructors" },
+  { number: 100, suffix: "%", label: "Satisfaction" },
 ];
+
+function AnimatedCounter({
+  target,
+  suffix,
+  inView,
+}: {
+  target: number;
+  suffix: string;
+  inView: boolean;
+}) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const duration = 2000;
+    const increment = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [inView, target]);
+
+  return (
+    <span>
+      {count}
+      {suffix}
+    </span>
+  );
+}
 
 export default function About() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+  const statsRef = useRef(null);
+  const statsInView = useInView(statsRef, { once: true, margin: "-50px" });
 
   return (
     <section id="about" className="cp-section" style={{ background: "#faf8fb" }} ref={ref}>
@@ -69,7 +107,7 @@ export default function About() {
             transition={{ duration: 0.7, delay: 0.4 }}
           >
             <img
-              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Chair.jpg?w=1200&q=90&ssl=1"
+              src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Chair.jpg?w=3840&q=100&ssl=1"
               alt="Pilates chair exercise at Cary Pilates"
               style={{
                 width: "100%",
@@ -82,11 +120,12 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Stats */}
+        {/* Animated Stats */}
         <motion.div
+          ref={statsRef}
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.6 }}
+          animate={statsInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.2 }}
           className="cp-grid-4"
           style={{
             background: "#fff",
@@ -95,8 +134,14 @@ export default function About() {
             boxShadow: "0 2px 20px rgba(139,58,139,0.04)",
           }}
         >
-          {stats.map((stat) => (
-            <div key={stat.label} style={{ textAlign: "center" }}>
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={statsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 + i * 0.15 }}
+              style={{ textAlign: "center" }}
+            >
               <p
                 style={{
                   fontFamily: "var(--font-playfair), Georgia, serif",
@@ -106,7 +151,11 @@ export default function About() {
                   marginBottom: "8px",
                 }}
               >
-                {stat.number}
+                <AnimatedCounter
+                  target={stat.number}
+                  suffix={stat.suffix}
+                  inView={statsInView}
+                />
               </p>
               <p
                 style={{
@@ -119,7 +168,7 @@ export default function About() {
               >
                 {stat.label}
               </p>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

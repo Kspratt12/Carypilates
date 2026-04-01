@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 
 interface ClassesProps {
@@ -12,7 +12,7 @@ const classes = [
     id: "classes",
     title: "Group Reformer",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-013-SQ.jpg?w=1080&q=90&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-013-SQ.jpg?w=3840&q=100&ssl=1",
     description:
       "Small group classes limited to just 5 people on premium Balanced Body reformers. Every session is a full-body experience tailored to your level.",
     cta: "View Schedule",
@@ -22,7 +22,7 @@ const classes = [
     id: "private-sessions",
     title: "Private Sessions",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-060-SQ.jpg?w=800&q=90&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-060-SQ.jpg?w=3840&q=100&ssl=1",
     description:
       "One-on-one sessions designed around your unique goals, body, and pace. Perfect for deepening your practice or addressing specific needs.",
     cta: "Book Private",
@@ -32,13 +32,58 @@ const classes = [
     id: "physical-therapy",
     title: "Physical Therapy",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-096-1.jpg?w=1080&q=90&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-096-1.jpg?w=3840&q=100&ssl=1",
     description:
       "Pilates-based physical therapy combining clinical expertise with mindful movement. Recover stronger and move with confidence.",
     cta: "Schedule Evaluation",
     href: "https://momence.com/appointments/appointment-reservation/38248?boardId=15636",
   },
 ];
+
+function TiltCard({ children, className, style, id }: {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  id?: string;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -5;
+    const rotateY = ((x - centerX) / centerX) * 5;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)";
+  }, []);
+
+  return (
+    <div
+      ref={cardRef}
+      id={id}
+      className={className}
+      style={{
+        ...style,
+        transition: "transform 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s cubic-bezier(0.4,0,0.2,1)",
+        willChange: "transform",
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function Classes({ onOpenCalendar }: ClassesProps) {
   const ref = useRef(null);
@@ -65,70 +110,73 @@ export default function Classes({ onOpenCalendar }: ClassesProps) {
           {classes.map((cls, i) => (
             <motion.div
               key={cls.id}
-              id={cls.id}
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.2 + i * 0.15 }}
-              className="cp-card"
-              style={{ cursor: "default" }}
             >
-              <div style={{ overflow: "hidden" }}>
-                <img
-                  src={cls.image}
-                  alt={cls.title}
-                  style={{
-                    width: "100%",
-                    aspectRatio: "4/3",
-                    objectFit: "cover",
-                    transition: "transform 0.7s cubic-bezier(0.4,0,0.2,1)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "scale(1.05)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "scale(1)";
-                  }}
-                />
-              </div>
-              <div style={{ padding: "32px" }}>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-playfair), Georgia, serif",
-                    fontSize: "1.3rem",
-                    marginBottom: "12px",
-                    color: "#2d1b2d",
-                  }}
-                >
-                  {cls.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: "0.92rem",
-                    color: "#6b5e6b",
-                    lineHeight: 1.8,
-                    marginBottom: "24px",
-                  }}
-                >
-                  {cls.description}
-                </p>
-                <a
-                  href={cls.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    fontSize: "0.75rem",
-                    letterSpacing: "2px",
-                    textTransform: "uppercase",
-                    color: "#8b7093",
-                    borderBottom: "1px solid #8b7093",
-                    paddingBottom: "4px",
-                    transition: "color 0.3s",
-                    fontWeight: 600,
-                  }}
-                >
-                  {cls.cta}
-                </a>
-              </div>
+              <TiltCard
+                id={cls.id}
+                className="cp-card"
+                style={{ cursor: "default" }}
+              >
+                <div style={{ overflow: "hidden" }}>
+                  <img
+                    src={cls.image}
+                    alt={cls.title}
+                    style={{
+                      width: "100%",
+                      aspectRatio: "4/3",
+                      objectFit: "cover",
+                      transition: "transform 0.7s cubic-bezier(0.4,0,0.2,1)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "scale(1.05)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "scale(1)";
+                    }}
+                  />
+                </div>
+                <div style={{ padding: "32px" }}>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-playfair), Georgia, serif",
+                      fontSize: "1.3rem",
+                      marginBottom: "12px",
+                      color: "#2d1b2d",
+                    }}
+                  >
+                    {cls.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "0.92rem",
+                      color: "#6b5e6b",
+                      lineHeight: 1.8,
+                      marginBottom: "24px",
+                    }}
+                  >
+                    {cls.description}
+                  </p>
+                  <a
+                    href={cls.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: "0.75rem",
+                      letterSpacing: "2px",
+                      textTransform: "uppercase",
+                      color: "#8b7093",
+                      borderBottom: "1px solid #8b7093",
+                      paddingBottom: "4px",
+                      transition: "color 0.3s",
+                      fontWeight: 600,
+                    }}
+                  >
+                    {cls.cta}
+                  </a>
+                </div>
+              </TiltCard>
             </motion.div>
           ))}
         </div>

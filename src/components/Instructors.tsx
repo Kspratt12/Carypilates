@@ -7,7 +7,7 @@ const featuredInstructor = {
   name: "Lora Guerra, MPT, NCPT",
   role: "Studio Owner, Physical Therapist & Pilates Instructor",
   image:
-    "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Lora-SQ.jpg?w=1000&ssl=1",
+    "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Lora-SQ.jpg?w=3840&q=100&ssl=1",
   bio: [
     "Lora founded Cary Pilates with a simple vision: to create a space where every person feels welcomed, challenged, and empowered through movement.",
     "As both a licensed Physical Therapist and nationally certified Pilates instructor, Lora brings a rare combination of clinical expertise and movement mastery to every session.",
@@ -20,28 +20,28 @@ const instructors = [
     name: "Jessica Satterlee, NCPT",
     role: "Pilates Instructor & Nutrition Coach",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Jessica-SQ-1.jpg?w=1000&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Jessica-SQ-1.jpg?w=3840&q=100&ssl=1",
     bio: "Jessica brings energy, precision, and nutrition expertise to every class.",
   },
   {
     name: "Grace Wilson",
     role: "Pilates Instructor",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Grace-SQ-1.jpg?w=1000&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/Grace-SQ-1.jpg?w=3840&q=100&ssl=1",
     bio: "Grace specializes in mindful movement, creating a calm and focused atmosphere.",
   },
   {
     name: "Breanna McLane",
     role: "Pilates Instructor",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/Breanna-SQ.jpg?w=1000&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/Breanna-SQ.jpg?w=3840&q=100&ssl=1",
     bio: "Breanna's dynamic teaching style makes challenging workouts feel accessible.",
   },
   {
     name: "Sophia Saylor",
     role: "Pilates Instructor",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2026/01/Sophia.jpg?w=1002&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2026/01/Sophia.jpg?w=3840&q=100&ssl=1",
     bio: "Sophia combines classical technique with modern approaches for every client.",
   },
 ];

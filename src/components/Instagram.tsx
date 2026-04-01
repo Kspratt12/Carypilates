@@ -5,22 +5,22 @@ import { motion, useInView } from "framer-motion";
 
 const galleryImages = [
   {
-    src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-013-SQ.jpg?w=600&q=85&ssl=1",
+    src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-013-SQ.jpg?w=3840&q=100&ssl=1",
     alt: "Group reformer class",
     link: "https://www.instagram.com/reel/CzJlUZQg3GZ/",
   },
   {
-    src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-060-SQ.jpg?w=600&q=85&ssl=1",
+    src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-060-SQ.jpg?w=3840&q=100&ssl=1",
     alt: "Private pilates session",
     link: "https://www.instagram.com/reel/Cu48tWqAcGq/",
   },
   {
-    src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Chair.jpg?w=600&q=85&ssl=1",
+    src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Chair.jpg?w=3840&q=100&ssl=1",
     alt: "Pilates chair exercise",
     link: "https://www.instagram.com/reel/CuqMMqhASDt/",
   },
   {
-    src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Hero.jpeg?w=600&q=85&ssl=1",
+    src: "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Hero.jpeg?w=3840&q=100&ssl=1",
     alt: "Studio interior",
     link: "https://www.instagram.com/p/COQp4QsAXbj/",
   },
