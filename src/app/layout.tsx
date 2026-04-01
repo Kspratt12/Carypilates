@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     "physical therapy",
   ],
   icons: {
-    icon: "https://i0.wp.com/carypilates.com/wp-content/uploads/2024/08/CaryPilates.png?fit=32%2C32&ssl=1",
-    apple: "https://i0.wp.com/carypilates.com/wp-content/uploads/2024/08/CaryPilates.png?fit=180%2C180&ssl=1",
+    icon: "https://i0.wp.com/carypilates.com/wp-content/uploads/2024/12/cropped-CP-Monogram-Small.png?fit=32%2C32&ssl=1",
+    apple: "https://i0.wp.com/carypilates.com/wp-content/uploads/2024/12/cropped-CP-Monogram-Small.png?fit=180%2C180&ssl=1",
   },
 };
 

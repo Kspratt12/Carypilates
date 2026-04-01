@@ -9,7 +9,7 @@ const classes = [
     description:
       "Small group classes for just 5 participants. Personalized attention, premium Balanced Body reformers, chairs, and towers.",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-126-SQ-1.jpg?fit=1080%2C1080&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-013-SQ.jpg?fit=1080%2C1080&ssl=1",
     level: "All Levels",
     duration: "50 min",
     cta: "3 Classes / $96",
@@ -20,7 +20,7 @@ const classes = [
     description:
       "One-on-one Pilates tailored to your unique fitness needs. Perfect for beginners or those seeking a customized approach.",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Hero.jpeg?fit=1920%2C1281&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-060-SQ.jpg?fit=800%2C800&ssl=1",
     level: "Personalized",
     duration: "50 min",
     cta: "Intro Session / $60",
@@ -31,7 +31,7 @@ const classes = [
     description:
       "Pilates-based PT focusing on recovery and wellness. A holistic approach that addresses root causes of pain.",
     image:
-      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-126-SQ-1.jpg?fit=1080%2C1080&ssl=1",
+      "https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-096-1.jpg?fit=1080%2C720&ssl=1",
     level: "Therapeutic",
     duration: "50 min",
     cta: "PT Eval / $150",

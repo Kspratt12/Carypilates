@@ -36,16 +36,17 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans), Georgia, serif;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 p {
   line-height: 1.85;
-  margin-bottom: 0.5em;
 }
 
-section {
-  position: relative;
+/* Force all sections to have proper inner padding */
+section > div {
+  padding-left: max(2rem, 5vw);
+  padding-right: max(2rem, 5vw);
 }
 
 ::-webkit-scrollbar {
@@ -63,8 +64,4 @@ section {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #8b7093;
-}
-
-img {
-  transition: opacity 0.3s ease;
 }

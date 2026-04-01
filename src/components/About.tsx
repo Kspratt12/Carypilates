@@ -72,7 +72,7 @@ export default function About() {
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <img
-                src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-126-SQ-1.jpg?fit=1080%2C1080&ssl=1"
+                src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Chair.jpg?fit=1200%2C1200&ssl=1"
                 alt="Small group Pilates class at Cary Pilates"
                 className="w-full aspect-[4/5] object-cover"
               />
