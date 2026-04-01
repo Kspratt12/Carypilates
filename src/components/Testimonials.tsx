@@ -41,19 +41,32 @@ export default function Testimonials() {
     setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1));
 
   return (
-    <section className="py-20 md:py-28 lg:py-36 bg-[#8b7093]" ref={ref}>
-      <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
+    <section
+      style={{
+        background: "linear-gradient(135deg, #8b7093 0%, #6b5674 100%)",
+        padding: "100px 0",
+      }}
+      ref={ref}
+    >
+      <div className="cp-container--narrow" style={{ textAlign: "center" }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
           {/* Stars */}
-          <div className="flex justify-center gap-1 mb-10">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "4px",
+              marginBottom: "40px",
+            }}
+          >
             {[...Array(5)].map((_, i) => (
               <svg
                 key={i}
-                className="w-5 h-5 text-yellow-300"
+                style={{ width: "18px", height: "18px", color: "#fbbf24" }}
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -63,7 +76,14 @@ export default function Testimonials() {
           </div>
 
           {/* Quote */}
-          <div className="min-h-[280px] md:min-h-[220px] flex items-center justify-center">
+          <div
+            style={{
+              minHeight: "260px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={current}
@@ -73,30 +93,79 @@ export default function Testimonials() {
                 transition={{ duration: 0.5 }}
               >
                 <p
-                  className="text-lg text-white/90 mb-10 italic"
-                  style={{ lineHeight: "2.2" }}
+                  style={{
+                    fontSize: "1.15rem",
+                    color: "rgba(255,255,255,0.9)",
+                    lineHeight: 2.2,
+                    fontStyle: "italic",
+                    marginBottom: "40px",
+                    maxWidth: "700px",
+                    margin: "0 auto 40px",
+                  }}
                 >
                   &ldquo;{testimonials[current].quote}&rdquo;
                 </p>
-                <p className="text-white text-sm tracking-[0.2em] uppercase mb-2">
+                <p
+                  style={{
+                    color: "#fff",
+                    fontSize: "0.85rem",
+                    letterSpacing: "3px",
+                    textTransform: "uppercase",
+                    marginBottom: "8px",
+                    fontWeight: 600,
+                  }}
+                >
                   {testimonials[current].name}
                 </p>
-                <p className="text-white/60 text-xs tracking-[0.15em] uppercase">
+                <p
+                  style={{
+                    color: "rgba(255,255,255,0.5)",
+                    fontSize: "0.75rem",
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                  }}
+                >
                   {testimonials[current].detail}
                 </p>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Navigation - Inline arrows with dots */}
-          <div className="flex items-center justify-center gap-6 mt-12">
+          {/* Navigation */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "24px",
+              marginTop: "48px",
+            }}
+          >
             <button
               onClick={prev}
-              className="w-10 h-10 rounded-full border border-white/30 text-white flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer bg-transparent"
+              style={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                border: "1px solid rgba(255,255,255,0.3)",
+                background: "transparent",
+                color: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                transition: "background 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+              }}
               aria-label="Previous testimonial"
             >
               <svg
-                className="w-4 h-4"
+                style={{ width: "16px", height: "16px" }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -110,14 +179,21 @@ export default function Testimonials() {
               </svg>
             </button>
 
-            <div className="flex gap-2">
+            <div style={{ display: "flex", gap: "8px" }}>
               {testimonials.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer border-none ${
-                    i === current ? "bg-white w-6" : "bg-white/40 w-2"
-                  }`}
+                  style={{
+                    height: "8px",
+                    width: i === current ? "24px" : "8px",
+                    borderRadius: "4px",
+                    border: "none",
+                    background:
+                      i === current ? "#fff" : "rgba(255,255,255,0.4)",
+                    cursor: "pointer",
+                    transition: "all 0.3s",
+                  }}
                   aria-label={`Go to testimonial ${i + 1}`}
                 />
               ))}
@@ -125,11 +201,29 @@ export default function Testimonials() {
 
             <button
               onClick={next}
-              className="w-10 h-10 rounded-full border border-white/30 text-white flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer bg-transparent"
+              style={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                border: "1px solid rgba(255,255,255,0.3)",
+                background: "transparent",
+                color: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                transition: "background 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+              }}
               aria-label="Next testimonial"
             >
               <svg
-                className="w-4 h-4"
+                style={{ width: "16px", height: "16px" }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

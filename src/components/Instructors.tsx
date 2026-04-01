@@ -51,34 +51,20 @@ export default function Instructors() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section
-      id="instructors"
-      className="py-20 md:py-28 lg:py-36 bg-white"
-      ref={ref}
-    >
-      <div className="max-w-6xl mx-auto px-6 md:px-8">
+    <section id="instructors" className="cp-section" style={{ background: "#faf8fb" }} ref={ref}>
+      <div className="cp-container">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-14"
+          className="cp-header"
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-[#8b7093] mb-4">
-            Meet the Team
-          </p>
-          <h2
-            className="text-3xl md:text-4xl lg:text-[2.8rem] mb-5"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-          >
-            Our Instructors
-          </h2>
-          <p
-            className="text-[15px] text-gray-500 max-w-md mx-auto"
-            style={{ lineHeight: "1.8" }}
-          >
-            Passionate, certified professionals dedicated to guiding your Pilates
-            journey.
+          <p className="cp-tag">Meet the Team</p>
+          <h2 className="cp-title">Our Instructors</h2>
+          <p className="cp-desc">
+            Passionate, certified professionals dedicated to guiding your
+            Pilates journey.
           </p>
         </motion.div>
 
@@ -87,30 +73,52 @@ export default function Instructors() {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center mb-20"
+          className="cp-grid-2"
+          style={{ alignItems: "center", marginBottom: "80px" }}
         >
-          <div className="overflow-hidden rounded-2xl">
+          <div style={{ overflow: "hidden", borderRadius: "20px" }}>
             <img
               src={featuredInstructor.image}
               alt={featuredInstructor.name}
-              className="w-full aspect-[3/4] object-cover"
+              style={{
+                width: "100%",
+                aspectRatio: "3/4",
+                objectFit: "cover",
+              }}
             />
           </div>
           <div>
-            <p className="text-xs tracking-[0.3em] uppercase text-[#8b7093] mb-4">
+            <p
+              style={{
+                fontSize: "0.75rem",
+                letterSpacing: "3px",
+                textTransform: "uppercase",
+                color: "#8b7093",
+                marginBottom: "16px",
+                fontWeight: 600,
+              }}
+            >
               {featuredInstructor.role}
             </p>
             <h3
-              className="text-2xl md:text-3xl mb-6"
-              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+              style={{
+                fontFamily: "var(--font-playfair), Georgia, serif",
+                fontSize: "clamp(1.5rem, 3vw, 2rem)",
+                marginBottom: "24px",
+                color: "#2d1b2d",
+              }}
             >
               {featuredInstructor.name}
             </h3>
             {featuredInstructor.bio.map((paragraph, i) => (
               <p
                 key={i}
-                className="text-[14px] text-gray-500 mb-5"
-                style={{ lineHeight: "1.8" }}
+                style={{
+                  fontSize: "0.95rem",
+                  color: "#6b5e6b",
+                  lineHeight: 1.8,
+                  marginBottom: "16px",
+                }}
               >
                 {paragraph}
               </p>
@@ -118,35 +126,68 @@ export default function Instructors() {
           </div>
         </motion.div>
 
-        {/* Other Instructors Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {/* Other Instructors */}
+        <div className="cp-grid-4">
           {instructors.map((instructor, i) => (
             <motion.div
               key={instructor.name}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
-              className="text-center group"
+              style={{ textAlign: "center" }}
             >
-              <div className="overflow-hidden mb-5 rounded-xl">
+              <div
+                style={{
+                  overflow: "hidden",
+                  marginBottom: "20px",
+                  borderRadius: "16px",
+                }}
+              >
                 <img
                   src={instructor.image}
                   alt={instructor.name}
-                  className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-105"
+                  style={{
+                    width: "100%",
+                    aspectRatio: "1",
+                    objectFit: "cover",
+                    transition: "transform 0.5s",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
                 />
               </div>
               <h4
-                className="text-lg mb-1"
-                style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                style={{
+                  fontFamily: "var(--font-playfair), Georgia, serif",
+                  fontSize: "1.1rem",
+                  marginBottom: "4px",
+                  color: "#2d1b2d",
+                }}
               >
                 {instructor.name}
               </h4>
-              <p className="text-[11px] tracking-[0.15em] uppercase text-[#8b7093] mb-3">
+              <p
+                style={{
+                  fontSize: "0.7rem",
+                  letterSpacing: "2px",
+                  textTransform: "uppercase",
+                  color: "#8b7093",
+                  marginBottom: "10px",
+                  fontWeight: 500,
+                }}
+              >
                 {instructor.role}
               </p>
               <p
-                className="text-[13px] text-gray-500"
-                style={{ lineHeight: "1.7" }}
+                style={{
+                  fontSize: "0.88rem",
+                  color: "#6b5e6b",
+                  lineHeight: 1.7,
+                }}
               >
                 {instructor.bio}
               </p>

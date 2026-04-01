@@ -12,25 +12,73 @@ export default function Hero({ onOpenCalendar }: HeroProps) {
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: 0.3 + i * 0.25, duration: 0.8, ease: "easeOut" as const },
+      transition: {
+        delay: 0.3 + i * 0.25,
+        duration: 0.8,
+        ease: "easeOut" as const,
+      },
     }),
   };
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section
+      style={{
+        position: "relative",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
+      }}
+    >
+      {/* Top accent line */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "5px",
+          background: "#8b7093",
+          zIndex: 30,
+        }}
+      />
+
       {/* Background Image */}
-      <div className="absolute inset-0">
+      <div style={{ position: "absolute", inset: 0 }}>
         <img
           src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Hero.jpeg?w=1920&q=90&ssl=1"
           alt="Cary Pilates studio"
-          className="w-full h-full object-cover"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            filter: "contrast(1.05) saturate(1.1)",
+          }}
         />
-        <div className="absolute inset-0 bg-black/45" />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(ellipse at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.55) 100%), linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.6) 100%)",
+          }}
+        />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 md:px-8 max-w-3xl mx-auto">
-        <div className="mb-12">
+      <div
+        style={{
+          position: "relative",
+          zIndex: 10,
+          textAlign: "center",
+          padding: "0 24px",
+          maxWidth: "700px",
+          margin: "0 auto",
+          width: "100%",
+        }}
+      >
+        <div style={{ marginBottom: "40px" }}>
           {[
             { text: "Find Your ", accent: "Strength." },
             { text: "Move with ", accent: "Grace." },
@@ -42,11 +90,21 @@ export default function Hero({ onOpenCalendar }: HeroProps) {
               initial="hidden"
               animate="visible"
               variants={lineVariants}
-              className="text-3xl md:text-5xl lg:text-[3.5rem] text-white mb-4 font-normal"
-              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+              style={{
+                fontFamily: "var(--font-playfair), Georgia, serif",
+                fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
+                fontWeight: 600,
+                color: "#fff",
+                marginBottom: "12px",
+                lineHeight: 1.15,
+                textShadow: "0 2px 10px rgba(0,0,0,0.3)",
+                letterSpacing: "1px",
+              }}
             >
               {line.text}
-              <em className="text-[#c9b5d0] italic">{line.accent}</em>
+              <em style={{ color: "#c9b5d0", fontStyle: "italic" }}>
+                {line.accent}
+              </em>
             </motion.h1>
           ))}
         </div>
@@ -55,8 +113,15 @@ export default function Hero({ onOpenCalendar }: HeroProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          className="text-white/75 text-[15px] md:text-base mb-12 max-w-md mx-auto"
-          style={{ lineHeight: "1.8" }}
+          style={{
+            color: "rgba(255,255,255,0.85)",
+            fontSize: "1.05rem",
+            lineHeight: 1.8,
+            maxWidth: "520px",
+            margin: "0 auto 40px",
+            textShadow: "0 1px 6px rgba(0,0,0,0.4)",
+            fontWeight: 300,
+          }}
         >
           A boutique Pilates studio in Cary, NC offering intimate group classes,
           private sessions, and Pilates-based physical therapy.
@@ -66,18 +131,17 @@ export default function Hero({ onOpenCalendar }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          style={{
+            display: "flex",
+            gap: "16px",
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
         >
-          <button
-            onClick={onOpenCalendar}
-            className="px-7 py-3.5 bg-[#8b7093] text-white text-[12px] tracking-widest uppercase hover:bg-[#6b5674] transition-all duration-300 cursor-pointer border-none rounded-full hover:shadow-lg hover:-translate-y-0.5"
-          >
-            Try an Intro Session
+          <button onClick={onOpenCalendar} className="cp-btn cp-btn--primary">
+            Book a Class
           </button>
-          <a
-            href="#classes"
-            className="px-7 py-3.5 border border-white/30 text-white text-[12px] tracking-widest uppercase hover:bg-white/10 transition-all duration-300 text-center rounded-full"
-          >
+          <a href="#classes" className="cp-btn cp-btn--outline">
             Explore Classes
           </a>
         </motion.div>
@@ -88,17 +152,41 @@ export default function Hero({ onOpenCalendar }: HeroProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        style={{
+          position: "absolute",
+          bottom: "40px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 10,
+        }}
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "8px",
+          }}
         >
-          <span className="text-white/50 text-[11px] tracking-[0.3em] uppercase">
+          <span
+            style={{
+              color: "rgba(255,255,255,0.4)",
+              fontSize: "0.7rem",
+              letterSpacing: "3px",
+              textTransform: "uppercase",
+            }}
+          >
             Scroll
           </span>
-          <div className="w-[1px] h-8 bg-white/30" />
+          <div
+            style={{
+              width: "1px",
+              height: "60px",
+              background: "linear-gradient(to bottom, #8b7093, transparent)",
+            }}
+          />
         </motion.div>
       </motion.div>
     </section>

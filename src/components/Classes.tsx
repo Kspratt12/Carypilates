@@ -45,35 +45,23 @@ export default function Classes({ onOpenCalendar }: ClassesProps) {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-20 md:py-28 lg:py-36 bg-[#faf9fb]" ref={ref}>
-      <div className="max-w-6xl mx-auto px-6 md:px-8">
-        {/* Section Header */}
+    <section className="cp-section" style={{ background: "#fff" }} ref={ref}>
+      <div className="cp-container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-14"
+          className="cp-header"
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-[#8b7093] mb-4">
-            What We Offer
-          </p>
-          <h2
-            className="text-3xl md:text-4xl lg:text-[2.8rem] mb-5"
-            style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
-          >
-            Our Classes
-          </h2>
-          <p
-            className="text-[15px] text-gray-500 max-w-md mx-auto"
-            style={{ lineHeight: "1.8" }}
-          >
-            Three distinct paths to help you find the movement practice that fits
-            your life.
+          <p className="cp-tag">What We Offer</p>
+          <h2 className="cp-title">Our Classes</h2>
+          <p className="cp-desc">
+            Three distinct paths to help you find the movement practice that
+            fits your life.
           </p>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-7">
+        <div className="cp-grid-3">
           {classes.map((cls, i) => (
             <motion.div
               key={cls.id}
@@ -81,25 +69,45 @@ export default function Classes({ onOpenCalendar }: ClassesProps) {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.2 + i * 0.15 }}
-              className="bg-white overflow-hidden group rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
+              className="cp-card"
+              style={{ cursor: "default" }}
             >
-              <div className="overflow-hidden">
+              <div style={{ overflow: "hidden" }}>
                 <img
                   src={cls.image}
                   alt={cls.title}
-                  className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
+                  style={{
+                    width: "100%",
+                    aspectRatio: "4/3",
+                    objectFit: "cover",
+                    transition: "transform 0.7s cubic-bezier(0.4,0,0.2,1)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
                 />
               </div>
-              <div className="p-7">
+              <div style={{ padding: "32px" }}>
                 <h3
-                  className="text-xl mb-3"
-                  style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+                  style={{
+                    fontFamily: "var(--font-playfair), Georgia, serif",
+                    fontSize: "1.3rem",
+                    marginBottom: "12px",
+                    color: "#2d1b2d",
+                  }}
                 >
                   {cls.title}
                 </h3>
                 <p
-                  className="text-[14px] text-gray-500 mb-6"
-                  style={{ lineHeight: "1.7" }}
+                  style={{
+                    fontSize: "0.92rem",
+                    color: "#6b5e6b",
+                    lineHeight: 1.8,
+                    marginBottom: "24px",
+                  }}
                 >
                   {cls.description}
                 </p>
@@ -107,7 +115,16 @@ export default function Classes({ onOpenCalendar }: ClassesProps) {
                   href={cls.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block text-[12px] tracking-[0.15em] uppercase text-[#8b7093] border-b border-[#8b7093] pb-1 hover:text-[#6b5674] hover:border-[#6b5674] transition-colors duration-300"
+                  style={{
+                    fontSize: "0.75rem",
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                    color: "#8b7093",
+                    borderBottom: "1px solid #8b7093",
+                    paddingBottom: "4px",
+                    transition: "color 0.3s",
+                    fontWeight: 600,
+                  }}
                 >
                   {cls.cta}
                 </a>
