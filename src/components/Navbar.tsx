@@ -80,7 +80,7 @@ export default function Navbar({ onOpenCalendar }: NavbarProps) {
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`text-[13px] tracking-wide uppercase transition-colors duration-300 bg-transparent border-none cursor-pointer ${
+                className={`text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 bg-transparent border-none cursor-pointer ${
                   scrolled
                     ? "text-gray-700 hover:text-[#8b7093]"
                     : "text-white/90 hover:text-white"
@@ -91,7 +91,7 @@ export default function Navbar({ onOpenCalendar }: NavbarProps) {
             ))}
             <button
               onClick={onOpenCalendar}
-              className={`ml-4 px-6 py-2.5 text-[13px] tracking-wide uppercase transition-all duration-300 cursor-pointer border-none ${
+              className={`ml-4 px-6 py-2.5 text-[11px] tracking-[0.15em] uppercase transition-all duration-300 cursor-pointer border-none ${
                 scrolled
                   ? "bg-[#8b7093] text-white hover:bg-[#6b5674]"
                   : "bg-white/20 text-white border border-white/40 hover:bg-white/30 backdrop-blur-sm"

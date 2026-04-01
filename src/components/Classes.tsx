@@ -73,7 +73,7 @@ export default function Classes({ onOpenCalendar }: ClassesProps) {
         </motion.div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-10">
           {classes.map((cls, i) => (
             <motion.div
               key={cls.id}
