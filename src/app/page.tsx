@@ -8,6 +8,7 @@ import Classes from "@/components/Classes";
 import Instructors from "@/components/Instructors";
 import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
+import Instagram from "@/components/Instagram";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import CalendarModal from "@/components/CalendarModal";
@@ -26,6 +27,7 @@ export default function Home() {
       <Instructors />
       <Testimonials />
       <Pricing />
+      <Instagram />
       <Contact />
       <Footer />
       <CalendarModal
