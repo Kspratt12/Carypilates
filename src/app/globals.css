@@ -30,10 +30,22 @@ body {
   color: #1d1d22;
   font-family: var(--font-body), system-ui, sans-serif;
   overflow-x: hidden;
+  line-height: 1.8;
+  font-size: 16px;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans), Georgia, serif;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.85;
+  margin-bottom: 0.5em;
+}
+
+section {
+  position: relative;
 }
 
 ::-webkit-scrollbar {

@@ -15,27 +15,27 @@ export default function About() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-28 md:py-36 bg-white" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid md:grid-cols-2 gap-20 items-center mb-24">
+    <section id="about" className="py-32 md:py-40 bg-white" ref={ref}>
+      <div className="max-w-6xl mx-auto px-8 md:px-12">
+        <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center mb-28">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
             <p
-              className="text-[#8b7093] text-sm tracking-[0.3em] uppercase mb-5"
+              className="text-[#8b7093] text-xs tracking-[0.35em] uppercase mb-6"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               Welcome to Cary Pilates
             </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-[#1d1d22] leading-tight mb-8">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#1d1d22] mb-10" style={{ lineHeight: 1.2 }}>
               More Than a{" "}
               <span className="italic text-[#8b7093]">Studio</span>
             </h2>
             <p
-              className="text-[#6c6c89] text-lg leading-relaxed mb-6"
-              style={{ fontFamily: "var(--font-inter)" }}
+              className="text-[#6c6c89] text-base mb-8"
+              style={{ fontFamily: "var(--font-inter)", lineHeight: 2 }}
             >
               Welcome to Cary Pilates, a boutique Pilates studio providing a
               personalized fitness experience in a supportive environment. Join
@@ -43,8 +43,8 @@ export default function About() {
               your unique needs.
             </p>
             <p
-              className="text-[#6c6c89] text-lg leading-relaxed mb-10"
-              style={{ fontFamily: "var(--font-inter)" }}
+              className="text-[#6c6c89] text-base mb-12"
+              style={{ fontFamily: "var(--font-inter)", lineHeight: 2 }}
             >
               Using Balanced Body Pilates reformers, chairs, towers, and other
               premium Pilates equipment, our sessions help build strength,
@@ -54,7 +54,7 @@ export default function About() {
               href="https://momence.com/Cary-Pilates/membership/New-Client-Special---Try-3-Classes/306414"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#8b7093] text-white px-8 py-4 rounded-full text-sm font-semibold tracking-wide hover:bg-[#7a6082] transition-all duration-300 hover:shadow-lg hover:shadow-[#8b7093]/25 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-3 bg-[#8b7093] text-white px-8 py-4 rounded-full text-sm font-semibold tracking-wide hover:bg-[#7a6082] transition-all duration-300 hover:shadow-lg hover:shadow-[#8b7093]/25 hover:-translate-y-0.5"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               New Client Special - 3 Classes/$96
@@ -68,50 +68,43 @@ export default function About() {
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
+            className="relative mt-8 md:mt-0"
           >
-            {/* Their actual class photo */}
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <img
                 src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-126-SQ-1.jpg?fit=1080%2C1080&ssl=1"
                 alt="Small group Pilates class at Cary Pilates"
-                className="w-full h-[550px] object-cover"
+                className="w-full aspect-[4/5] object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
-            {/* Floating card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="absolute -bottom-6 -left-6 bg-[#8b7093] text-white py-6 px-8 rounded-2xl shadow-xl"
+              className="absolute -bottom-5 -left-5 bg-[#8b7093] text-white py-5 px-7 rounded-2xl shadow-xl"
             >
-              <p className="text-2xl font-light mb-1">Serving</p>
-              <p className="text-sm opacity-80" style={{ fontFamily: "var(--font-inter)" }}>
-                Cary, Morrisville, Apex
-              </p>
-              <p className="text-sm opacity-80" style={{ fontFamily: "var(--font-inter)" }}>
-                & surrounding areas
+              <p className="text-xl font-light mb-1">Serving</p>
+              <p className="text-xs opacity-80" style={{ fontFamily: "var(--font-inter)", lineHeight: 1.8 }}>
+                Cary, Morrisville, Apex & surrounding areas
               </p>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Stats */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 bg-[#faf8fb] rounded-3xl p-12 md:p-16"
+          className="grid grid-cols-2 md:grid-cols-4 gap-10 bg-[#faf8fb] rounded-3xl p-10 md:p-16"
         >
           {stats.map((stat, i) => (
             <div key={i} className="text-center">
-              <p className="text-5xl md:text-6xl font-light text-[#8b7093] mb-3">
+              <p className="text-4xl md:text-5xl font-light text-[#8b7093] mb-4">
                 {stat.number}
-                <span className="text-2xl">{stat.suffix}</span>
+                <span className="text-xl">{stat.suffix}</span>
               </p>
               <p
-                className="text-[#6c6c89] text-sm tracking-wide uppercase"
+                className="text-[#6c6c89] text-xs tracking-widest uppercase"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 {stat.label}

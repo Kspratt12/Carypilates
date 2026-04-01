@@ -8,8 +8,7 @@ export default function Hero({
   onOpenCalendar: () => void;
 }) {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Their actual hero image */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-32">
       <div className="absolute inset-0">
         <img
           src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/10/CaryPilates-Hero.jpeg?fit=1920%2C1281&ssl=1"
@@ -19,19 +18,14 @@ export default function Hero({
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
       </div>
 
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="absolute top-20 right-10 w-72 h-72 bg-[#8b7093]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-[#8b7093]/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <div className="relative z-10 text-center px-8 md:px-12 max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
           <p
-            className="text-[#c9b5d0] text-sm md:text-base tracking-[0.3em] uppercase mb-8"
+            className="text-[#c9b5d0] text-xs md:text-sm tracking-[0.35em] uppercase mb-10"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Boutique Pilates Studio - Cary, NC
@@ -42,7 +36,8 @@ export default function Hero({
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-          className="text-5xl md:text-7xl lg:text-[6.5rem] text-white font-light leading-[1.1] mb-4"
+          className="text-4xl md:text-6xl lg:text-7xl text-white font-light mb-6"
+          style={{ lineHeight: 1.15 }}
         >
           Find Your{" "}
           <span className="italic text-[#c9b5d0]">Strength.</span>
@@ -52,7 +47,8 @@ export default function Hero({
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.35, ease: "easeOut" }}
-          className="text-5xl md:text-7xl lg:text-[6.5rem] text-white font-light leading-[1.1] mb-4"
+          className="text-4xl md:text-6xl lg:text-7xl text-white font-light mb-6"
+          style={{ lineHeight: 1.15 }}
         >
           Move with{" "}
           <span className="italic text-[#c9b5d0]">Grace.</span>
@@ -62,7 +58,8 @@ export default function Hero({
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-          className="text-5xl md:text-7xl lg:text-[6.5rem] text-white font-light leading-[1.1] mb-10"
+          className="text-4xl md:text-6xl lg:text-7xl text-white font-light mb-14"
+          style={{ lineHeight: 1.15 }}
         >
           Live in{" "}
           <span className="italic text-[#c9b5d0]">Balance.</span>
@@ -72,8 +69,8 @@ export default function Hero({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.65, ease: "easeOut" }}
-          className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
-          style={{ fontFamily: "var(--font-inter)" }}
+          className="text-white/80 text-base md:text-lg max-w-xl mx-auto mb-14"
+          style={{ fontFamily: "var(--font-inter)", lineHeight: 1.9 }}
         >
           A boutique Pilates studio providing a personalized fitness experience
           in a supportive environment. Small group classes limited to just 5
@@ -88,14 +85,14 @@ export default function Hero({
         >
           <button
             onClick={onOpenCalendar}
-            className="bg-[#8b7093] text-white px-12 py-4.5 rounded-full text-base font-semibold tracking-wide hover:bg-[#7a6082] transition-all duration-300 hover:shadow-2xl hover:shadow-[#8b7093]/40 hover:-translate-y-1"
+            className="bg-[#8b7093] text-white px-10 py-4 rounded-full text-sm font-semibold tracking-wider uppercase hover:bg-[#7a6082] transition-all duration-300 hover:shadow-2xl hover:shadow-[#8b7093]/40 hover:-translate-y-1"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Try an Intro Session
           </button>
           <a
             href="#classes"
-            className="border-2 border-white/30 text-white px-12 py-4.5 rounded-full text-base font-semibold tracking-wide hover:bg-white hover:text-[#1d1d22] transition-all duration-300 hover:-translate-y-1"
+            className="border-2 border-white/30 text-white px-10 py-4 rounded-full text-sm font-semibold tracking-wider uppercase hover:bg-white hover:text-[#1d1d22] transition-all duration-300 hover:-translate-y-1"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Explore Classes
