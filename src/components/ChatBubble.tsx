@@ -76,24 +76,45 @@ export default function ChatBubble() {
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Detect mobile
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
   useEffect(() => {
-    if (isOpen) inputRef.current?.focus();
-  }, [isOpen]);
+    if (isOpen && !isMobile) inputRef.current?.focus();
+  }, [isOpen, isMobile]);
 
-  // Prevent body scroll when chat is open on mobile
+  // Lock body scroll on mobile when open
   useEffect(() => {
-    if (isOpen && window.innerWidth < 640) {
+    if (isOpen && isMobile) {
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
       document.body.style.overflow = "hidden";
-      return () => { document.body.style.overflow = ""; };
+      return () => {
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        document.body.style.overflow = "";
+        window.scrollTo(0, scrollY);
+      };
     }
-  }, [isOpen]);
+  }, [isOpen, isMobile]);
 
   const sendMessage = (text: string) => {
     if (!text.trim()) return;
@@ -111,249 +132,215 @@ export default function ChatBubble() {
 
   return (
     <>
-      {/* Chat Button */}
-      <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        className="chat-fab"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        {isOpen ? (
-          <svg style={{ width: "24px", height: "24px" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg style={{ width: "24px", height: "24px" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
+      {/* Chat FAB - hidden when open on mobile */}
+      <AnimatePresence>
+        {!(isOpen && isMobile) && (
+          <motion.button
+            initial={false}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            onClick={() => setIsOpen(!isOpen)}
+            className="chat-fab"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {isOpen ? (
+              <svg style={{ width: "24px", height: "24px" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg style={{ width: "24px", height: "24px" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            )}
+          </motion.button>
         )}
-      </motion.button>
+      </AnimatePresence>
 
       {/* Pulse ring */}
-      {!isOpen && (
-        <div className="chat-pulse" />
-      )}
+      {!isOpen && <div className="chat-pulse" />}
 
       {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.3 }}
-            className="chat-window"
-          >
-            {/* Header */}
-            <div className="chat-header">
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <div
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                    background: "rgba(255,255,255,0.2)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  <img
-                    src="https://i0.wp.com/carypilates.com/wp-content/uploads/2024/12/cropped-CP-Monogram-Small.png?fit=32%2C32&ssl=1"
-                    alt=""
-                    style={{ width: "24px", height: "24px", borderRadius: "50%" }}
-                  />
-                </div>
-                <div style={{ flex: 1 }}>
-                  <p style={{ fontWeight: 600, fontSize: "0.95rem" }}>Cary Pilates</p>
-                  <p style={{ fontSize: "0.72rem", opacity: 0.7 }}>
-                    <span
-                      style={{
-                        display: "inline-block",
-                        width: "6px",
-                        height: "6px",
-                        borderRadius: "50%",
-                        background: "#4ade80",
-                        marginRight: "6px",
-                        verticalAlign: "middle",
-                      }}
-                    />
-                    Online now
-                  </p>
-                </div>
-                {/* Close button for mobile */}
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="chat-close-btn"
-                >
-                  <svg style={{ width: "20px", height: "20px" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Messages */}
-            <div className="chat-messages">
-              {messages.map((msg, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  style={{
-                    alignSelf: msg.role === "user" ? "flex-end" : "flex-start",
-                    maxWidth: "85%",
-                  }}
-                >
+          <>
+            {/* Backdrop on mobile */}
+            {isMobile && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsOpen(false)}
+                style={{
+                  position: "fixed",
+                  inset: 0,
+                  background: "rgba(0,0,0,0.3)",
+                  zIndex: 40,
+                }}
+              />
+            )}
+            <motion.div
+              initial={isMobile ? { y: "100%" } : { opacity: 0, y: 20, scale: 0.95 }}
+              animate={isMobile ? { y: 0 } : { opacity: 1, y: 0, scale: 1 }}
+              exit={isMobile ? { y: "100%" } : { opacity: 0, y: 20, scale: 0.95 }}
+              transition={isMobile ? { type: "spring", damping: 30, stiffness: 300 } : { duration: 0.3 }}
+              className={isMobile ? "chat-window chat-window--mobile" : "chat-window"}
+            >
+              {/* Header */}
+              <div className="chat-header">
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                   <div
                     style={{
-                      padding: "12px 16px",
-                      borderRadius:
-                        msg.role === "user"
-                          ? "16px 16px 4px 16px"
-                          : "16px 16px 16px 4px",
-                      background:
-                        msg.role === "user" ? "#8b7093" : "#f3eff4",
-                      color: msg.role === "user" ? "#fff" : "#2d1b2d",
-                      fontSize: "0.88rem",
-                      lineHeight: 1.6,
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      background: "rgba(255,255,255,0.2)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
                     }}
                   >
-                    {msg.text}
-                  </div>
-                </motion.div>
-              ))}
-              {isTyping && (
-                <div
-                  style={{
-                    alignSelf: "flex-start",
-                    padding: "12px 16px",
-                    borderRadius: "16px 16px 16px 4px",
-                    background: "#f3eff4",
-                    display: "flex",
-                    gap: "4px",
-                  }}
-                >
-                  {[0, 1, 2].map((i) => (
-                    <span
-                      key={i}
-                      style={{
-                        width: "6px",
-                        height: "6px",
-                        borderRadius: "50%",
-                        background: "#8b7093",
-                        opacity: 0.5,
-                        animation: `typingDot 1.2s ${i * 0.2}s infinite`,
-                      }}
+                    <img
+                      src="https://i0.wp.com/carypilates.com/wp-content/uploads/2024/12/cropped-CP-Monogram-Small.png?fit=32%2C32&ssl=1"
+                      alt=""
+                      style={{ width: "24px", height: "24px", borderRadius: "50%" }}
                     />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontWeight: 600, fontSize: "0.95rem" }}>Cary Pilates</p>
+                    <p style={{ fontSize: "0.72rem", opacity: 0.7 }}>
+                      <span
+                        style={{
+                          display: "inline-block",
+                          width: "6px",
+                          height: "6px",
+                          borderRadius: "50%",
+                          background: "#4ade80",
+                          marginRight: "6px",
+                          verticalAlign: "middle",
+                        }}
+                      />
+                      Online now
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="chat-close-btn"
+                    aria-label="Close chat"
+                  >
+                    <svg style={{ width: "20px", height: "20px" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              {/* Messages */}
+              <div className="chat-messages">
+                {messages.map((msg, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    style={{
+                      alignSelf: msg.role === "user" ? "flex-end" : "flex-start",
+                      maxWidth: "85%",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "12px 16px",
+                        borderRadius:
+                          msg.role === "user"
+                            ? "16px 16px 4px 16px"
+                            : "16px 16px 16px 4px",
+                        background:
+                          msg.role === "user" ? "#8b7093" : "#f3eff4",
+                        color: msg.role === "user" ? "#fff" : "#2d1b2d",
+                        fontSize: "0.9rem",
+                        lineHeight: 1.6,
+                        wordBreak: "break-word",
+                      }}
+                    >
+                      {msg.text}
+                    </div>
+                  </motion.div>
+                ))}
+                {isTyping && (
+                  <div
+                    style={{
+                      alignSelf: "flex-start",
+                      padding: "12px 16px",
+                      borderRadius: "16px 16px 16px 4px",
+                      background: "#f3eff4",
+                      display: "flex",
+                      gap: "4px",
+                    }}
+                  >
+                    {[0, 1, 2].map((i) => (
+                      <span
+                        key={i}
+                        className="chat-typing-dot"
+                        style={{
+                          width: "6px",
+                          height: "6px",
+                          borderRadius: "50%",
+                          background: "#8b7093",
+                          animationDelay: `${i * 0.2}s`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+
+              {/* Quick Questions */}
+              {messages.length <= 2 && (
+                <div className="chat-quick-questions">
+                  {quickQuestions.slice(0, 4).map((q) => (
+                    <button
+                      key={q}
+                      onClick={() => sendMessage(q)}
+                      className="chat-quick-btn"
+                    >
+                      {q}
+                    </button>
                   ))}
                 </div>
               )}
-              <div ref={messagesEndRef} />
-            </div>
 
-            {/* Quick Questions */}
-            {messages.length <= 2 && (
-              <div className="chat-quick-questions">
-                {quickQuestions.slice(0, 4).map((q) => (
-                  <button
-                    key={q}
-                    onClick={() => sendMessage(q)}
-                    style={{
-                      padding: "6px 12px",
-                      borderRadius: "20px",
-                      border: "1px solid #e8e0e8",
-                      background: "#fff",
-                      color: "#8b7093",
-                      fontSize: "0.72rem",
-                      cursor: "pointer",
-                      transition: "all 0.2s",
-                      fontFamily: "inherit",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = "#f3eff4";
-                      e.currentTarget.style.borderColor = "#8b7093";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "#fff";
-                      e.currentTarget.style.borderColor = "#e8e0e8";
-                    }}
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* Input */}
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                sendMessage(input);
-              }}
-              className="chat-input-form"
-            >
-              <input
-                ref={inputRef}
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Type a message..."
-                style={{
-                  flex: 1,
-                  padding: "10px 16px",
-                  borderRadius: "24px",
-                  border: "1px solid #e8e0e8",
-                  background: "#faf8fb",
-                  fontSize: "16px",
-                  outline: "none",
-                  fontFamily: "inherit",
-                  transition: "border-color 0.3s",
-                  minWidth: 0,
+              {/* Input */}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  sendMessage(input);
                 }}
-                onFocus={(e) => { e.currentTarget.style.borderColor = "#8b7093"; }}
-                onBlur={(e) => { e.currentTarget.style.borderColor = "#e8e0e8"; }}
-              />
-              <button
-                type="submit"
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  background: "#8b7093",
-                  border: "none",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#fff",
-                  flexShrink: 0,
-                  transition: "background 0.3s",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "#6b5674"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "#8b7093"; }}
+                className="chat-input-form"
               >
-                <svg style={{ width: "18px", height: "18px" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
-              </button>
-            </form>
-          </motion.div>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Type a message..."
+                  className="chat-input"
+                />
+                <button
+                  type="submit"
+                  className="chat-send-btn"
+                  aria-label="Send message"
+                >
+                  <svg style={{ width: "18px", height: "18px" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  </svg>
+                </button>
+              </form>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
-
-      <style jsx>{`
-        @keyframes chatPulse {
-          0% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.4); opacity: 0; }
-          100% { transform: scale(1); opacity: 0; }
-        }
-        @keyframes typingDot {
-          0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-          30% { transform: translateY(-4px); opacity: 1; }
-        }
-      `}</style>
     </>
   );
 }

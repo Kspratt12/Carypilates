@@ -237,20 +237,6 @@ a {
     padding-right: 16px;
   }
 
-  /* Chat - full screen on mobile */
-  .chat-window {
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    max-width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    max-height: 100vh;
-    max-height: 100dvh;
-    border-radius: 0;
-  }
-
   .chat-fab {
     bottom: 16px;
     right: 16px;
@@ -263,15 +249,6 @@ a {
     right: 16px;
     width: 56px;
     height: 56px;
-  }
-
-  .chat-close-btn {
-    display: flex;
-  }
-
-  .chat-input-form {
-    padding: 12px 16px;
-    padding-bottom: max(12px, env(safe-area-inset-bottom));
   }
 
   /* Instagram grid - 2 col on mobile */
@@ -348,7 +325,7 @@ a {
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 32px rgba(139,112,147,0.4);
-  z-index: 40;
+  z-index: 50;
   color: #fff;
 }
 
@@ -360,11 +337,12 @@ a {
   height: 60px;
   border-radius: 50%;
   border: 2px solid rgba(139,112,147,0.4);
-  z-index: 39;
+  z-index: 49;
   animation: chatPulse 2s infinite;
   pointer-events: none;
 }
 
+/* Desktop chat window */
 .chat-window {
   position: fixed;
   bottom: 96px;
@@ -376,23 +354,37 @@ a {
   background: #fff;
   border-radius: 24px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-  z-index: 41;
+  z-index: 51;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
+/* Mobile full-screen chat */
+.chat-window--mobile {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  border-radius: 0;
+}
+
 .chat-header {
   background: linear-gradient(135deg, #8b7093, #6b5674);
   padding: 20px 24px;
+  padding-top: max(20px, env(safe-area-inset-top));
   color: #fff;
   flex-shrink: 0;
 }
 
 .chat-close-btn {
-  display: none;
-  width: 32px;
-  height: 32px;
+  display: flex;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: rgba(255,255,255,0.15);
   border: none;
@@ -401,6 +393,11 @@ a {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.chat-close-btn:active {
+  background: rgba(255,255,255,0.3);
 }
 
 .chat-messages {
@@ -411,22 +408,97 @@ a {
   flex-direction: column;
   gap: 12px;
   -webkit-overflow-scrolling: touch;
+  min-height: 0;
 }
 
 .chat-quick-questions {
-  padding: 0 16px 8px;
+  padding: 8px 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   flex-shrink: 0;
 }
 
+.chat-quick-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #e8e0e8;
+  background: #fff;
+  color: #8b7093;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.chat-quick-btn:active {
+  background: #f3eff4;
+  border-color: #8b7093;
+}
+
 .chat-input-form {
   padding: 12px 16px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
   border-top: 1px solid #f0edf1;
   display: flex;
   gap: 8px;
   flex-shrink: 0;
+  background: #fff;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 24px;
+  border: 1px solid #e8e0e8;
+  background: #faf8fb;
+  font-size: 16px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.3s;
+  min-width: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.chat-input:focus {
+  border-color: #8b7093;
+}
+
+.chat-send-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #8b7093;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+
+.chat-send-btn:active {
+  background: #6b5674;
+}
+
+/* Typing dots animation */
+@keyframes chatTypingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+.chat-typing-dot {
+  animation: chatTypingDot 1.2s infinite;
+}
+
+/* Pulse animation */
+@keyframes chatPulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
 }
 
 /* ─── Instagram grid mobile ─── */
