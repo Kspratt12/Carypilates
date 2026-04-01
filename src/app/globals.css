@@ -231,6 +231,239 @@ a {
     padding-left: 20px;
     padding-right: 20px;
   }
+
+  .cp-container--narrow {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Chat - full screen on mobile */
+  .chat-window {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    border-radius: 0;
+  }
+
+  .chat-fab {
+    bottom: 16px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .chat-pulse {
+    bottom: 16px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .chat-close-btn {
+    display: flex;
+  }
+
+  .chat-input-form {
+    padding: 12px 16px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  /* Instagram grid - 2 col on mobile */
+  .ig-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 180px 180px 180px 180px;
+  }
+
+  .ig-grid .ig-tall {
+    grid-row: 1 / 3;
+  }
+
+  /* Schedule mobile tweaks */
+  .schedule-row-right {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .schedule-header-row {
+    display: none;
+  }
+
+  /* FirstVisit timeline - adjust for mobile */
+  .fv-timeline-track,
+  .fv-timeline-progress {
+    left: 27px !important;
+  }
+
+  .fv-step {
+    gap: 20px !important;
+    padding: 24px 0 !important;
+  }
+
+  .fv-circle {
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  .fv-circle-number {
+    font-size: 1rem !important;
+  }
+
+  /* CTA Banner mobile padding */
+  .cta-banner-inner {
+    padding: 48px 24px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .ig-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 160px 160px 160px 160px;
+  }
+
+  .cp-grid-4 {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
+/* ─── Chat Widget ─── */
+.chat-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b7093, #6b5674);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(139,112,147,0.4);
+  z-index: 40;
+  color: #fff;
+}
+
+.chat-pulse {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid rgba(139,112,147,0.4);
+  z-index: 39;
+  animation: chatPulse 2s infinite;
+  pointer-events: none;
+}
+
+.chat-window {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  width: 380px;
+  max-width: calc(100vw - 48px);
+  height: 520px;
+  max-height: calc(100vh - 140px);
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  z-index: 41;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-header {
+  background: linear-gradient(135deg, #8b7093, #6b5674);
+  padding: 20px 24px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.chat-close-btn {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chat-quick-questions {
+  padding: 0 16px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.chat-input-form {
+  padding: 12px 16px;
+  border-top: 1px solid #f0edf1;
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ─── Instagram grid mobile ─── */
+.ig-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 220px 220px 220px;
+  gap: 6px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.ig-grid .ig-tall {
+  grid-row: 1 / 3;
+}
+
+/* ─── Schedule mobile ─── */
+.schedule-row-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.schedule-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px 8px;
+  gap: 16px;
+}
+
+.schedule-header-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
 }
 
 /* ─── Selection ─── */

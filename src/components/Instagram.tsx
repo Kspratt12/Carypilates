@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 /*
@@ -8,19 +8,39 @@ import { motion, useInView } from "framer-motion";
   Videos are downloaded reels playing inline.
 */
 
-function VideoCell({ src, alt }: { src: string; alt: string }) {
+function VideoCell({ src, alt, poster }: { src: string; alt: string; poster?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const handleMouseEnter = useCallback(() => { videoRef.current?.play().catch(() => {}); }, []);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handleInteraction = useCallback(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play().catch(() => {});
+      setIsPlaying(true);
+    } else {
+      v.pause();
+      v.currentTime = 0;
+      setIsPlaying(false);
+    }
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    videoRef.current?.play().catch(() => {});
+    setIsPlaying(true);
+  }, []);
+
   const handleMouseLeave = useCallback(() => {
     const v = videoRef.current;
-    if (v) { v.pause(); v.currentTime = 0; }
+    if (v) { v.pause(); v.currentTime = 0; setIsPlaying(false); }
   }, []);
 
   return (
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{ width: "100%", height: "100%", position: "relative" }}
+      onClick={handleInteraction}
+      style={{ width: "100%", height: "100%", position: "relative", cursor: "pointer" }}
     >
       <video
         ref={videoRef}
@@ -29,13 +49,24 @@ function VideoCell({ src, alt }: { src: string; alt: string }) {
         loop
         playsInline
         preload="metadata"
-        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        poster={poster}
+        style={{ width: "100%", height: "100%", objectFit: "cover", background: "#2d1b2d" }}
       />
+      {/* Play icon overlay - shown when not playing */}
       <div style={{
-        position: "absolute", bottom: "10px", left: "10px",
-        width: "30px", height: "30px", borderRadius: "50%",
-        background: "rgba(0,0,0,0.45)", backdropFilter: "blur(4px)",
-        display: "flex", alignItems: "center", justifyContent: "center",
+        position: "absolute",
+        bottom: "10px",
+        left: "10px",
+        width: "30px",
+        height: "30px",
+        borderRadius: "50%",
+        background: "rgba(0,0,0,0.45)",
+        backdropFilter: "blur(4px)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        opacity: isPlaying ? 0 : 1,
+        transition: "opacity 0.3s",
       }}>
         <svg style={{ width: "12px", height: "12px", color: "#fff", marginLeft: "2px" }} fill="currentColor" viewBox="0 0 24 24">
           <path d="M8 5v14l11-7z" />
@@ -50,6 +81,7 @@ function ImageCell({ src, alt }: { src: string; alt: string }) {
     <img
       src={src}
       alt={alt}
+      loading="lazy"
       style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }}
       onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; }}
       onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
@@ -73,7 +105,7 @@ export default function Instagram() {
           <p className="cp-tag">Follow Along</p>
           <h2 className="cp-title">Inside the Studio</h2>
           <p className="cp-desc">
-            Hover to preview videos. Real sessions, real clients, real results.
+            Tap or hover to preview videos. Real sessions, real clients, real results.
           </p>
         </motion.div>
 
@@ -82,21 +114,18 @@ export default function Instagram() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            gridTemplateRows: "220px 220px 220px",
-            gap: "6px",
-            borderRadius: "20px",
-            overflow: "hidden",
-          }}
+          className="ig-grid"
         >
           {/* Row 1, Col 1 - Tall video spanning 2 rows */}
-          <div style={{ gridRow: "1 / 3", overflow: "hidden" }}>
-            <VideoCell src="/videos/reel1.mp4" alt="Reformer class in action" />
+          <div className="ig-tall" style={{ overflow: "hidden" }}>
+            <VideoCell
+              src="/videos/reel1.mp4"
+              alt="Reformer class in action"
+              poster="/CaryPilates-096-1.png"
+            />
           </div>
 
-          {/* Row 1, Col 2 - Group class (unique: CaryPilates-126) */}
+          {/* Row 1, Col 2 - Group class */}
           <div style={{ overflow: "hidden" }}>
             <ImageCell
               src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-126-SQ-1.jpg?w=800&q=95&ssl=1"
@@ -104,7 +133,7 @@ export default function Instagram() {
             />
           </div>
 
-          {/* Row 1, Col 3 - Private session (unique: CaryPilates-042-45) */}
+          {/* Row 1, Col 3 - Private session */}
           <div style={{ overflow: "hidden" }}>
             <ImageCell
               src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-042-45-1.jpg?w=800&q=95&ssl=1"
@@ -112,7 +141,7 @@ export default function Instagram() {
             />
           </div>
 
-          {/* Row 2, Col 2 - Studio reformers (unique: CaryPilates-151) */}
+          {/* Row 2, Col 2 - Studio reformers */}
           <div style={{ overflow: "hidden" }}>
             <ImageCell
               src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-151-SQ.jpg?w=800&q=95&ssl=1"
@@ -122,10 +151,14 @@ export default function Instagram() {
 
           {/* Row 2, Col 3 - Video reel 2 */}
           <div style={{ overflow: "hidden" }}>
-            <VideoCell src="/videos/reel2.mp4" alt="Private session demo" />
+            <VideoCell
+              src="/videos/reel2.mp4"
+              alt="Private session demo"
+              poster="/pilate.png"
+            />
           </div>
 
-          {/* Row 3, Col 1 - PT session (unique: CaryPilates-098-45) */}
+          {/* Row 3, Col 1 - PT session */}
           <div style={{ overflow: "hidden" }}>
             <ImageCell
               src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-098-45.jpg?w=800&q=95&ssl=1"
@@ -135,10 +168,14 @@ export default function Instagram() {
 
           {/* Row 3, Col 2 - Video reel 3 */}
           <div style={{ overflow: "hidden" }}>
-            <VideoCell src="/videos/reel3.mp4" alt="Pilates movement" />
+            <VideoCell
+              src="/videos/reel3.mp4"
+              alt="Pilates movement"
+              poster="/CaryPilates-096-1.png"
+            />
           </div>
 
-          {/* Row 3, Col 3 - Studio wide shot (unique: CaryPilates-055-Hero) */}
+          {/* Row 3, Col 3 - Studio wide shot */}
           <div style={{ overflow: "hidden" }}>
             <ImageCell
               src="https://i0.wp.com/carypilates.com/wp-content/uploads/2025/11/CaryPilates-055-Hero-1920.jpg?w=800&q=95&ssl=1"

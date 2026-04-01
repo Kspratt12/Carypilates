@@ -87,6 +87,14 @@ export default function ChatBubble() {
     if (isOpen) inputRef.current?.focus();
   }, [isOpen]);
 
+  // Prevent body scroll when chat is open on mobile
+  useEffect(() => {
+    if (isOpen && window.innerWidth < 640) {
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = ""; };
+    }
+  }, [isOpen]);
+
   const sendMessage = (text: string) => {
     if (!text.trim()) return;
     const userMsg: Message = { role: "user", text: text.trim() };
@@ -106,23 +114,7 @@ export default function ChatBubble() {
       {/* Chat Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        style={{
-          position: "fixed",
-          bottom: "24px",
-          right: "24px",
-          width: "60px",
-          height: "60px",
-          borderRadius: "50%",
-          background: "linear-gradient(135deg, #8b7093, #6b5674)",
-          border: "none",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          boxShadow: "0 8px 32px rgba(139,112,147,0.4)",
-          zIndex: 40,
-          color: "#fff",
-        }}
+        className="chat-fab"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
       >
@@ -139,20 +131,7 @@ export default function ChatBubble() {
 
       {/* Pulse ring */}
       {!isOpen && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: "24px",
-            right: "24px",
-            width: "60px",
-            height: "60px",
-            borderRadius: "50%",
-            border: "2px solid rgba(139,112,147,0.4)",
-            zIndex: 39,
-            animation: "chatPulse 2s infinite",
-            pointerEvents: "none",
-          }}
-        />
+        <div className="chat-pulse" />
       )}
 
       {/* Chat Window */}
@@ -163,31 +142,10 @@ export default function ChatBubble() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            style={{
-              position: "fixed",
-              bottom: "96px",
-              right: "24px",
-              width: "380px",
-              maxWidth: "calc(100vw - 48px)",
-              height: "520px",
-              maxHeight: "calc(100vh - 140px)",
-              background: "#fff",
-              borderRadius: "24px",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
-              zIndex: 41,
-              display: "flex",
-              flexDirection: "column",
-              overflow: "hidden",
-            }}
+            className="chat-window"
           >
             {/* Header */}
-            <div
-              style={{
-                background: "linear-gradient(135deg, #8b7093, #6b5674)",
-                padding: "20px 24px",
-                color: "#fff",
-              }}
-            >
+            <div className="chat-header">
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                 <div
                   style={{
@@ -198,7 +156,7 @@ export default function ChatBubble() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "18px",
+                    flexShrink: 0,
                   }}
                 >
                   <img
@@ -207,7 +165,7 @@ export default function ChatBubble() {
                     style={{ width: "24px", height: "24px", borderRadius: "50%" }}
                   />
                 </div>
-                <div>
+                <div style={{ flex: 1 }}>
                   <p style={{ fontWeight: 600, fontSize: "0.95rem" }}>Cary Pilates</p>
                   <p style={{ fontSize: "0.72rem", opacity: 0.7 }}>
                     <span
@@ -224,20 +182,20 @@ export default function ChatBubble() {
                     Online now
                   </p>
                 </div>
+                {/* Close button for mobile */}
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="chat-close-btn"
+                >
+                  <svg style={{ width: "20px", height: "20px" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
               </div>
             </div>
 
             {/* Messages */}
-            <div
-              style={{
-                flex: 1,
-                overflowY: "auto",
-                padding: "16px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-              }}
-            >
+            <div className="chat-messages">
               {messages.map((msg, i) => (
                 <motion.div
                   key={i}
@@ -297,14 +255,7 @@ export default function ChatBubble() {
 
             {/* Quick Questions */}
             {messages.length <= 2 && (
-              <div
-                style={{
-                  padding: "0 16px 8px",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "6px",
-                }}
-              >
+              <div className="chat-quick-questions">
                 {quickQuestions.slice(0, 4).map((q) => (
                   <button
                     key={q}
@@ -341,12 +292,7 @@ export default function ChatBubble() {
                 e.preventDefault();
                 sendMessage(input);
               }}
-              style={{
-                padding: "12px 16px",
-                borderTop: "1px solid #f0edf1",
-                display: "flex",
-                gap: "8px",
-              }}
+              className="chat-input-form"
             >
               <input
                 ref={inputRef}
@@ -360,10 +306,11 @@ export default function ChatBubble() {
                   borderRadius: "24px",
                   border: "1px solid #e8e0e8",
                   background: "#faf8fb",
-                  fontSize: "0.88rem",
+                  fontSize: "16px",
                   outline: "none",
                   fontFamily: "inherit",
                   transition: "border-color 0.3s",
+                  minWidth: 0,
                 }}
                 onFocus={(e) => { e.currentTarget.style.borderColor = "#8b7093"; }}
                 onBlur={(e) => { e.currentTarget.style.borderColor = "#e8e0e8"; }}
